@@ -1,0 +1,272 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import { useTheme } from "./ThemeProvider";
+
+interface Command {
+  id: string;
+  label: string;
+  action: () => void;
+  icon: string;
+  group: string;
+}
+
+interface CommandPaletteProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
+  const [query, setQuery] = useState("");
+  const { theme, toggleTheme, toggleMode } = useTheme();
+
+  const commands: Command[] = [
+    {
+      id: "nav-work",
+      label: "Work",
+      action: () => {
+        window.location.href = "/";
+        onOpenChange(false);
+      },
+      icon: "💼",
+      group: "Navigation",
+    },
+    {
+      id: "nav-services",
+      label: "Services",
+      action: () => {
+        window.location.href = "/services";
+        onOpenChange(false);
+      },
+      icon: "🛠️",
+      group: "Navigation",
+    },
+    {
+      id: "nav-about",
+      label: "About",
+      action: () => {
+        window.location.href = "/about";
+        onOpenChange(false);
+      },
+      icon: "👤",
+      group: "Navigation",
+    },
+    {
+      id: "nav-contact",
+      label: "Contact",
+      action: () => {
+        window.location.href = "/contact";
+        onOpenChange(false);
+      },
+      icon: "📧",
+      group: "Navigation",
+    },
+    {
+      id: "project-minute-maids",
+      label: "Minute Maids",
+      action: () => {
+        window.open("https://minutemaidsclean.com", "_blank");
+        onOpenChange(false);
+      },
+      icon: "🧹",
+      group: "Projects",
+    },
+    {
+      id: "project-posh",
+      label: "Posh",
+      action: () => {
+        window.open("https://poshnewberg.com", "_blank");
+        onOpenChange(false);
+      },
+      icon: "💅",
+      group: "Projects",
+    },
+    {
+      id: "project-quit-smoking",
+      label: "Quit Smoking Tracker",
+      action: () => {
+        window.open("https://cto-playground.vercel.app/", "_blank");
+        onOpenChange(false);
+      },
+      icon: "🚭",
+      group: "Projects",
+    },
+    {
+      id: "copy-email",
+      label: "Copy Email",
+      action: () => {
+        navigator.clipboard.writeText("colby@example.com");
+        onOpenChange(false);
+      },
+      icon: "📋",
+      group: "Actions",
+    },
+    {
+      id: "open-github",
+      label: "Open GitHub",
+      action: () => {
+        window.open("https://github.com/conels08", "_blank");
+        onOpenChange(false);
+      },
+      icon: "🐙",
+      group: "External",
+    },
+    {
+      id: "open-linkedin",
+      label: "Open LinkedIn",
+      action: () => {
+        window.open("https://linkedin.com/in/colby-nelsen", "_blank");
+        onOpenChange(false);
+      },
+      icon: "💼",
+      group: "External",
+    },
+    {
+      id: "open-calendly",
+      label: "Open Calendly",
+      action: () => {
+        window.open("https://calendly.com/colby-nelsen", "_blank");
+        onOpenChange(false);
+      },
+      icon: "📅",
+      group: "External",
+    },
+    {
+      id: "toggle-theme",
+      label: `Switch to ${theme === "dark" ? "Light" : "Dark"} Mode`,
+      action: () => {
+        toggleTheme();
+        onOpenChange(false);
+      },
+      icon: theme === "dark" ? "☀️" : "🌙",
+      group: "Settings",
+    },
+    {
+      id: "toggle-hud",
+      label: "Toggle HUD Mode",
+      action: () => {
+        toggleMode();
+        onOpenChange(false);
+      },
+      icon: "☢️",
+      group: "Settings",
+    },
+  ];
+
+  const filteredCommands = query
+    ? commands.filter(
+        (cmd) =>
+          cmd.label.toLowerCase().includes(query.toLowerCase()) ||
+          cmd.group.toLowerCase().includes(query.toLowerCase())
+      )
+    : commands;
+
+  const groupedCommands = filteredCommands.reduce((groups, cmd) => {
+    const group = groups[cmd.group] || [];
+    group.push(cmd);
+    groups[cmd.group] = group;
+    return groups;
+  }, {} as Record<string, Command[]>);
+
+  useEffect(() => {
+    if (!open) {
+      setQuery("");
+    }
+  }, [open]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onOpenChange(false);
+      }
+    };
+
+    if (open) {
+      document.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "unset";
+    };
+  }, [open, onOpenChange]);
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-start justify-center p-4 pt-20">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+            onClick={() => onOpenChange(false)}
+          />
+
+          <motion.div
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            className="relative w-full max-w-md bg-[var(--background)] border border-[var(--border)] rounded-lg shadow-xl overflow-hidden"
+          >
+            <div className="flex items-center gap-3 p-4 border-b border-[var(--border)]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="text-[var(--muted)]"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.35-4.35" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Type a command..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="flex-1 bg-transparent text-[var(--foreground)] placeholder-[var(--muted)] focus:outline-none"
+                autoFocus
+              />
+              <span className="text-xs text-[var(--muted)] font-mono">⌘K</span>
+            </div>
+
+            <div className="max-h-96 overflow-y-auto py-2">
+              {Object.entries(groupedCommands).map(([group, commands]) => (
+                <div key={group}>
+                  <div className="px-4 py-2 text-xs font-medium text-[var(--muted)] uppercase tracking-wider">
+                    {group}
+                  </div>
+                  {commands.map((cmd) => (
+                    <button
+                      key={cmd.id}
+                      onClick={cmd.action}
+                      className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-[var(--card)] transition-colors text-[var(--foreground)]"
+                    >
+                      <span className="text-base">{cmd.icon}</span>
+                      <span className="flex-1">{cmd.label}</span>
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {query && filteredCommands.length === 0 && (
+              <div className="p-4 text-center text-[var(--muted)]">
+                No commands found
+              </div>
+            )}
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
