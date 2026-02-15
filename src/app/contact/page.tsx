@@ -12,21 +12,52 @@ export default function ContactPage() {
     name: "",
     email: "",
     message: "",
+    honey: "",
   });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
+    setErrorMessage("");
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const payload: {
+        name: string;
+        email: string;
+        message: string;
+        company?: string;
+        website?: string;
+        honey?: string;
+      } = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        honey: formData.honey,
+      };
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = (await res.json()) as { ok: boolean; error?: string };
+
+      if (!res.ok || !data.ok) {
+        setStatus("error");
+        setErrorMessage(data.error ?? "Please try again or email me directly.");
+        return;
+      }
+
       setStatus("sent");
-      setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus("idle"), 3000);
+      setFormData({ name: "", email: "", message: "", honey: "" });
     } catch {
       setStatus("error");
-      setTimeout(() => setStatus("idle"), 3000);
+      setErrorMessage("Please try again or email me directly.");
     }
   };
 
@@ -127,6 +158,17 @@ export default function ContactPage() {
             transition={{ delay: 0.2 }}
           >
             <form onSubmit={handleSubmit} className="space-y-6">
+              <input
+                type="text"
+                name="honey"
+                value={formData.honey}
+                onChange={handleChange}
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="hidden"
+              />
+
               <div>
                 <label
                   htmlFor="name"
@@ -238,7 +280,7 @@ export default function ContactPage() {
                   }`}
                 >
                   <p className="font-medium">Error sending message</p>
-                  <p className="text-sm">Please try again or email me directly.</p>
+                  <p className="text-sm">{errorMessage || "Please try again or email me directly."}</p>
                 </motion.div>
               )}
             </form>
