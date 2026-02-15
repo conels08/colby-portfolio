@@ -16,29 +16,16 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>("dark");
-  const [mode, setMode] = useState<Mode>("default");
-  const [mounted, setMounted] = useState(false);
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark";
+    return (localStorage.getItem("theme") as Theme | null) ?? "dark";
+  });
+  const [mode, setMode] = useState<Mode>(() => {
+    if (typeof window === "undefined") return "default";
+    return (localStorage.getItem("mode") as Mode | null) ?? "default";
+  });
 
   useEffect(() => {
-    setMounted(true);
-    const storedTheme = localStorage.getItem("theme") as Theme | null;
-    const storedMode = localStorage.getItem("mode") as Mode | null;
-
-    if (storedTheme) {
-      setTheme(storedTheme);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setTheme("dark");
-    }
-
-    if (storedMode) {
-      setMode(storedMode);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-
     const root = document.documentElement;
     
     if (mode === "hud") {
@@ -57,7 +44,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     localStorage.setItem("theme", theme);
     localStorage.setItem("mode", mode);
-  }, [theme, mode, mounted]);
+  }, [theme, mode]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));

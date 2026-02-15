@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useTheme } from "./ThemeProvider";
 
 interface Command {
@@ -20,15 +20,25 @@ interface CommandPaletteProps {
 
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
+  const router = useRouter();
   const { theme, toggleTheme, toggleMode } = useTheme();
+  const handleOpenChange = useCallback(
+    (nextOpen: boolean) => {
+      if (!nextOpen) {
+        setQuery("");
+      }
+      onOpenChange(nextOpen);
+    },
+    [onOpenChange]
+  );
 
   const commands: Command[] = [
     {
       id: "nav-work",
       label: "Work",
       action: () => {
-        window.location.href = "/";
-        onOpenChange(false);
+        router.push("/");
+        handleOpenChange(false);
       },
       icon: "💼",
       group: "Navigation",
@@ -37,8 +47,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       id: "nav-services",
       label: "Services",
       action: () => {
-        window.location.href = "/services";
-        onOpenChange(false);
+        router.push("/services");
+        handleOpenChange(false);
       },
       icon: "🛠️",
       group: "Navigation",
@@ -47,8 +57,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       id: "nav-about",
       label: "About",
       action: () => {
-        window.location.href = "/about";
-        onOpenChange(false);
+        router.push("/about");
+        handleOpenChange(false);
       },
       icon: "👤",
       group: "Navigation",
@@ -57,8 +67,8 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       id: "nav-contact",
       label: "Contact",
       action: () => {
-        window.location.href = "/contact";
-        onOpenChange(false);
+        router.push("/contact");
+        handleOpenChange(false);
       },
       icon: "📧",
       group: "Navigation",
@@ -68,7 +78,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: "Minute Maids",
       action: () => {
         window.open("https://minutemaidsclean.com", "_blank");
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: "🧹",
       group: "Projects",
@@ -78,7 +88,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: "Posh",
       action: () => {
         window.open("https://poshnewberg.com", "_blank");
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: "💅",
       group: "Projects",
@@ -88,7 +98,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: "Quit Smoking Tracker",
       action: () => {
         window.open("https://cto-playground.vercel.app/", "_blank");
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: "🚭",
       group: "Projects",
@@ -98,7 +108,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: "Copy Email",
       action: () => {
         navigator.clipboard.writeText("colby@example.com");
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: "📋",
       group: "Actions",
@@ -108,7 +118,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: "Open GitHub",
       action: () => {
         window.open("https://github.com/conels08", "_blank");
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: "🐙",
       group: "External",
@@ -118,7 +128,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: "Open LinkedIn",
       action: () => {
         window.open("https://linkedin.com/in/colby-nelsen", "_blank");
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: "💼",
       group: "External",
@@ -128,7 +138,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: "Open Calendly",
       action: () => {
         window.open("https://calendly.com/colby-nelsen", "_blank");
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: "📅",
       group: "External",
@@ -138,7 +148,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: `Switch to ${theme === "dark" ? "Light" : "Dark"} Mode`,
       action: () => {
         toggleTheme();
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: theme === "dark" ? "☀️" : "🌙",
       group: "Settings",
@@ -148,7 +158,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       label: "Toggle HUD Mode",
       action: () => {
         toggleMode();
-        onOpenChange(false);
+        handleOpenChange(false);
       },
       icon: "☢️",
       group: "Settings",
@@ -171,15 +181,9 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   }, {} as Record<string, Command[]>);
 
   useEffect(() => {
-    if (!open) {
-      setQuery("");
-    }
-  }, [open]);
-
-  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onOpenChange(false);
+        handleOpenChange(false);
       }
     };
 
@@ -192,7 +196,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "unset";
     };
-  }, [open, onOpenChange]);
+  }, [open, handleOpenChange]);
 
   return (
     <AnimatePresence>
@@ -203,7 +207,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="absolute inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={() => onOpenChange(false)}
+            onClick={() => handleOpenChange(false)}
           />
 
           <motion.div
