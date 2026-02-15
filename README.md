@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Colby Portfolio
 
-## Getting Started
+Next.js App Router portfolio site for showcasing work, services, and contact flow.
 
-First, run the development server:
+## Tech Stack
+
+- Next.js 16 + React 19 + TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- Lucide React
+
+## Scripts
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev    # start local dev server
+npm run build  # production build
+npm run start  # run production server
+npm run lint   # run ESLint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `/` -> home / featured work
+- `/work` -> full project listing + filters
+- `/services` -> services detail page
+- `/about` -> about page
+- `/contact` -> contact page + form UI
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+```text
+.
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx              # root layout, metadata, global shell
+│   │   ├── globals.css             # design tokens, global styles, HUD mode styles
+│   │   ├── page.tsx                # home page
+│   │   ├── about/page.tsx          # about page
+│   │   ├── contact/page.tsx        # contact page + client-side form state
+│   │   ├── services/page.tsx       # services page
+│   │   ├── work/page.tsx           # work page with filters + drawer
+│   │   └── favicon.ico
+│   ├── components/
+│   │   ├── ThemeProvider.tsx       # theme and HUD mode context/provider
+│   │   ├── Navbar.tsx              # navigation, mobile menu, toggles, command palette trigger
+│   │   ├── Footer.tsx              # footer/social links
+│   │   ├── CommandPalette.tsx      # Cmd/Ctrl+K command palette
+│   │   ├── ProjectCard.tsx         # reusable project card
+│   │   └── ProjectDrawer.tsx       # right-side project details drawer
+│   └── data/
+│       └── projects.ts             # typed project + services content source
+├── public/
+│   ├── robots.txt
+│   ├── sitemap.xml
+│   └── *.svg                       # static icon/assets
+├── package.json
+├── next.config.ts
+├── tsconfig.json
+├── eslint.config.mjs
+├── postcss.config.mjs
+└── README.md
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Content is primarily driven from `src/data/projects.ts`.
+- Theme state and HUD mode are controlled in `src/components/ThemeProvider.tsx`.
+- `src/app/contact/page.tsx` currently uses simulated form submission (no backend endpoint).
