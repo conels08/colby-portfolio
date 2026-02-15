@@ -48,13 +48,13 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: "Colby Portfolio <onboarding@resend.dev>",
       to: [toEmail],
-      reply_to: email, // so you can hit Reply in Gmail
+      replyTo: email, // so you can hit Reply in Gmail
       subject,
       text,
-    } as unknown as Parameters<typeof resend.emails.send>[0]);
+    });
 
     return NextResponse.json({ ok: true });
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       { ok: false, error: "Failed to send message." },
       { status: 500 }
