@@ -107,7 +107,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       id: "copy-email",
       label: "Copy Email",
       action: () => {
-        navigator.clipboard.writeText("colby@example.com");
+        navigator.clipboard.writeText("colbynelsen@gmail.com");
         handleOpenChange(false);
       },
       icon: "📋",
@@ -127,7 +127,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       id: "open-linkedin",
       label: "Open LinkedIn",
       action: () => {
-        window.open("https://linkedin.com/in/colby-nelsen", "_blank");
+        window.open("https://www.linkedin.com/in/colbynelsen", "_blank");
         handleOpenChange(false);
       },
       icon: "💼",
@@ -137,7 +137,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       id: "open-calendly",
       label: "Open Calendly",
       action: () => {
-        window.open("https://calendly.com/colby-nelsen", "_blank");
+        window.open("https://calendly.com/colbynelsen/30min", "_blank");
         handleOpenChange(false);
       },
       icon: "📅",

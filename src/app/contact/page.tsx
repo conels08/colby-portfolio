@@ -73,10 +73,10 @@ export default function ContactPage() {
                   Email
                 </h3>
                 <a
-                  href="mailto:colby@example.com"
+                  href="mailto:colbynelsen@gmail.com"
                   className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
                 >
-                  colby@example.com
+                  colbynelsen@gmail.com
                 </a>
               </div>
 
@@ -85,7 +85,7 @@ export default function ContactPage() {
                   Calendly
                 </h3>
                 <a
-                  href="https://calendly.com/colby-nelsen"
+                  href="https://calendly.com/colbynelsen/30min"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"

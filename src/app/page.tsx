@@ -68,7 +68,7 @@ export default function HomePage() {
               Get a Quote
             </Link>
             <Link
-              href="https://calendly.com/colby-nelsen"
+              href="https://calendly.com/colbynelsen/30min"
               target="_blank"
               rel="noopener noreferrer"
               className={`px-6 py-3 rounded-lg font-medium transition-colors ${

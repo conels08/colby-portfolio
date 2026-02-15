@@ -7,11 +7,11 @@ export function Footer() {
   const { isHud } = useTheme();
 
   const socialLinks = [
-    { href: "mailto:colby@example.com", label: "Email" },
+    { href: "mailto:colbynelsen@gmail.com", label: "Email" },
     { href: "https://github.com/conels08", label: "GitHub" },
-    { href: "https://linkedin.com/in/colby-nelsen", label: "LinkedIn" },
-    { href: "https://calendly.com/colby-nelsen", label: "Calendly" },
-    { href: "https://fiverr.com/colby-nelsen", label: "Fiverr" },
+    { href: "https://www.linkedin.com/in/colbynelsen", label: "LinkedIn" },
+    { href: "https://calendly.com/colbynelsen/30min", label: "Calendly" },
+    { href: "https://www.fiverr.com/colbynelsen", label: "Fiverr" },
   ];
 
   return (

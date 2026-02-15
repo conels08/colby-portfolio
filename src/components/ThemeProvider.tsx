@@ -16,14 +16,23 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "dark";
-    return (localStorage.getItem("theme") as Theme | null) ?? "dark";
-  });
-  const [mode, setMode] = useState<Mode>(() => {
-    if (typeof window === "undefined") return "default";
-    return (localStorage.getItem("mode") as Mode | null) ?? "default";
-  });
+  const [theme, setTheme] = useState<Theme>("dark");
+  const [mode, setMode] = useState<Mode>("default");
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    const storedMode = localStorage.getItem("mode");
+
+    setTimeout(() => {
+      if (storedTheme === "light" || storedTheme === "dark") {
+        setTheme(storedTheme);
+      }
+
+      if (storedMode === "default" || storedMode === "hud") {
+        setMode(storedMode);
+      }
+    }, 0);
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;
@@ -38,8 +47,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
     if (theme === "dark" && mode !== "hud") {
       root.classList.add("dark");
+      root.classList.remove("light");
     } else {
       root.classList.remove("dark");
+      root.classList.add("light");
     }
 
     localStorage.setItem("theme", theme);
