@@ -75,32 +75,12 @@ export function Navbar() {
             ))}
 
             <div className="flex items-center gap-3 ml-4">
-              <button
-                onClick={() => setCmdOpen(true)}
-                className="p-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
-                aria-label="Open command palette"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+              <div className="relative group">
+                <button
+                  onClick={() => setCmdOpen(true)}
+                  className="p-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+                  aria-label="Open command palette"
                 >
-                  <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
-                </svg>
-              </button>
-
-              <button
-                onClick={toggleTheme}
-                className="p-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === "dark" ? (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="18"
@@ -112,37 +92,72 @@ export function Navbar() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
-                    <circle cx="12" cy="12" r="4" />
-                    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
                   </svg>
-                ) : (
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                  </svg>
-                )}
-              </button>
+                </button>
+                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] group-focus-within:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                  Open command palette
+                </span>
+              </div>
 
-              <button
-                onClick={toggleMode}
-                className={`p-2 transition-colors ${
-                  isHud
-                    ? "text-[var(--foreground)] hud-glow"
-                    : "text-[var(--muted)] hover:text-[var(--foreground)]"
-                }`}
-                aria-label="Toggle HUD mode"
-              >
-                ☢
-              </button>
+              <div className="relative group">
+                <button
+                  onClick={toggleTheme}
+                  className="p-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+                  aria-label="Toggle theme"
+                >
+                  {theme === "dark" ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="4" />
+                      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                    </svg>
+                  )}
+                </button>
+                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] group-focus-within:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                  {theme === "dark" ? "Dark mode active" : "Light mode active"}
+                </span>
+              </div>
+
+              <div className="relative group">
+                <button
+                  onClick={toggleMode}
+                  className={`p-2 transition-colors ${
+                    isHud
+                      ? "text-[var(--foreground)] hud-glow"
+                      : "text-[var(--muted)] hover:text-[var(--foreground)]"
+                  }`}
+                  aria-label="Toggle HUD mode"
+                >
+                  ☢
+                </button>
+                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] group-focus-within:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                  Fallout theme
+                </span>
+              </div>
 
               <Link
                 href="/contact"
