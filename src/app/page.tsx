@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Info } from "lucide-react";
 import { projects, services } from "@/data/projects";
 import { ProjectCard } from "@/components/ProjectCard";
 import { ProjectDrawer } from "@/components/ProjectDrawer";
@@ -29,6 +30,8 @@ export default function HomePage() {
   };
 
   const featuredProjects = projects.filter(p => p.status === "shipped").slice(0, 3);
+  const newsletterTooltipCopy =
+    "No spam - just occasional updates, relevant discounts, and early access to new apps and projects.";
 
   return (
     <div className="min-h-screen">
@@ -281,9 +284,27 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="mb-12"
           >
-            <h2 className={`text-3xl font-bold mb-4 ${isHud ? "hud-glow" : ""}`}>
-              Stay Updated
-            </h2>
+            <div className="mb-4 flex items-center justify-center gap-2">
+              <h2 className={`text-3xl font-bold ${isHud ? "hud-glow" : ""}`}>
+                Stay Updated
+              </h2>
+              <div className="relative group">
+                <button
+                  type="button"
+                  aria-label="Newsletter info"
+                  className={`peer inline-flex items-center justify-center transition-colors ${
+                    isHud
+                      ? "text-yellow-300 hover:text-yellow-200 drop-shadow-[0_0_8px_rgba(253,224,71,0.85)]"
+                      : "text-[var(--accent)] hover:text-[var(--accent-hover)]"
+                  }`}
+                >
+                  <Info size={16} />
+                </button>
+                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 w-72 -translate-x-1/2 rounded-md border border-[var(--border)] bg-[var(--card)] px-3 py-2 text-xs text-[var(--foreground)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] peer-focus-visible:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 peer-focus-visible:opacity-100 peer-focus-visible:translate-y-0">
+                  {newsletterTooltipCopy}
+                </span>
+              </div>
+            </div>
             <p className="text-[var(--muted)]">
               Get notified about new projects and insights
             </p>

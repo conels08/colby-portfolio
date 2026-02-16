@@ -231,9 +231,9 @@ export default function ContactPage() {
                   rows={6}
                   className={`w-full px-4 py-3 rounded-lg border ${
                     isHud
-                      ? "border-[var(--border)] bg-[var(--background)] text-[var(--foreground)]"
+                      ? "border-[var(--border)] bg-[var(--background)]"
                       : "border-[var(--border)] bg-[var(--background)]"
-                  } focus:outline-none focus:border-[var(--accent)] transition-colors resize-none`}
+                  } text-[var(--foreground)] placeholder:text-[var(--muted)] placeholder:opacity-100 focus:outline-none focus:border-[var(--accent)] transition-colors resize-none`}
                   placeholder="Tell me about your project, timeline, and budget..."
                 />
               </div>

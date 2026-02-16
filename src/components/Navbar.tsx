@@ -78,7 +78,7 @@ export function Navbar() {
               <div className="relative group">
                 <button
                   onClick={() => setCmdOpen(true)}
-                  className="p-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+                  className="peer p-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
                   aria-label="Open command palette"
                 >
                   <svg
@@ -95,7 +95,7 @@ export function Navbar() {
                     <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z" />
                   </svg>
                 </button>
-                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] group-focus-within:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] peer-focus-visible:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 peer-focus-visible:opacity-100 peer-focus-visible:translate-y-0">
                   Open command palette
                 </span>
               </div>
@@ -103,7 +103,7 @@ export function Navbar() {
               <div className="relative group">
                 <button
                   onClick={toggleTheme}
-                  className="p-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+                  className="peer p-2 text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
                   aria-label="Toggle theme"
                 >
                   {theme === "dark" ? (
@@ -137,7 +137,7 @@ export function Navbar() {
                     </svg>
                   )}
                 </button>
-                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] group-focus-within:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] peer-focus-visible:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 peer-focus-visible:opacity-100 peer-focus-visible:translate-y-0">
                   {theme === "dark" ? "Dark mode active" : "Light mode active"}
                 </span>
               </div>
@@ -145,7 +145,7 @@ export function Navbar() {
               <div className="relative group">
                 <button
                   onClick={toggleMode}
-                  className={`p-2 transition-colors ${
+                  className={`peer p-2 transition-colors ${
                     isHud
                       ? "text-[var(--foreground)] hud-glow"
                       : "text-[var(--muted)] hover:text-[var(--foreground)]"
@@ -154,7 +154,7 @@ export function Navbar() {
                 >
                   ☢
                 </button>
-                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] group-focus-within:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:opacity-100 group-focus-within:translate-y-0">
+                <span className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 -translate-x-1/2 whitespace-nowrap rounded-md bg-[var(--card)] px-2 py-1 text-xs text-[var(--foreground)] border border-[var(--border)] opacity-0 translate-y-1 transition-all duration-150 [transition-delay:0ms] group-hover:[transition-delay:1500ms] peer-focus-visible:[transition-delay:1500ms] group-hover:opacity-100 group-hover:translate-y-0 peer-focus-visible:opacity-100 peer-focus-visible:translate-y-0">
                   Fallout theme
                 </span>
               </div>

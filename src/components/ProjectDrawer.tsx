@@ -68,7 +68,8 @@ export function ProjectDrawer({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px]"
+            className="fixed inset-0 bg-black/40 backdrop-blur-[1px]"
+            style={{ zIndex: 10000 }}
             onClick={onClose}
           />
 
@@ -77,9 +78,10 @@ export function ProjectDrawer({
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className={`fixed top-0 right-0 h-full w-full max-w-2xl bg-[var(--background)] border-l border-[var(--border)] z-50 flex flex-col ${
+            className={`!fixed top-0 right-0 h-full w-full max-w-2xl bg-[var(--background)] border-l border-[var(--border)] flex flex-col ${
               isHud ? "hud-bracket" : ""
             }`}
+            style={{ zIndex: 10001 }}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-6 border-b border-[var(--border)]">

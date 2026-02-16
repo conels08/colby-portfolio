@@ -119,6 +119,7 @@ body {
   height: 20px;
   border-color: var(--foreground);
   border-style: solid;
+  pointer-events: none;
 }
 
 .hud-bracket::before {
