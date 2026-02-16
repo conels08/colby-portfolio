@@ -6,8 +6,12 @@ import { Footer } from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.colbynelsen.com"),
   title: "Colby Nelsen - Full-Stack Developer & Web Designer",
   description: "I build polished websites and full-stack web apps — fast. Modern Next.js builds with clean UX, strong fundamentals, and performance-first execution.",
+  alternates: {
+    canonical: "/",
+  },
   keywords: ["Next.js", "Full-Stack", "Web Development", "React", "TypeScript", "Tailwind CSS", "Portfolio"],
   authors: [{ name: "Colby Nelsen" }],
   openGraph: {
