@@ -6,7 +6,7 @@ import { Footer } from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.colbynelsen.com"),
+  metadataBase: new URL("https://colbynelsen.com"),
   title: "Colby Nelsen - Full-Stack Developer & Web Designer",
   description: "I build polished websites and full-stack web apps — fast. Modern Next.js builds with clean UX, strong fundamentals, and performance-first execution.",
   alternates: {
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: "Colby Nelsen - Full-Stack Developer & Web Designer",
     description: "I build polished websites and full-stack web apps — fast.",
     type: "website",
-    url: "https://colbynelsen.dev",
+    url: "https://colbynelsen.com",
   },
   twitter: {
     card: "summary_large_image",
