@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { Project } from "@/data/projects";
@@ -22,6 +23,8 @@ export function ProjectDrawer({
   onTabChange,
 }: ProjectDrawerProps) {
   const { isHud } = useTheme();
+  const [previewFailed, setPreviewFailed] = useState(false);
+  const previewSrc = project?.previewSrc ?? project?.thumbnailSrc ?? project?.image ?? "";
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -41,6 +44,13 @@ export function ProjectDrawer({
     };
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => setPreviewFailed(false), 0);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, project?.id]);
+
   const tabs = [
     { id: "overview", label: "Overview" },
     { id: "preview", label: "Preview" },
@@ -58,7 +68,7 @@ export function ProjectDrawer({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[1px]"
             onClick={onClose}
           />
 
@@ -70,6 +80,7 @@ export function ProjectDrawer({
             className={`fixed top-0 right-0 h-full w-full max-w-2xl bg-[var(--background)] border-l border-[var(--border)] z-50 flex flex-col ${
               isHud ? "hud-bracket" : ""
             }`}
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-6 border-b border-[var(--border)]">
               <h2 className={`text-xl font-semibold ${isHud ? "hud-glow" : ""}`}>
@@ -169,13 +180,31 @@ export function ProjectDrawer({
                 {activeTab === "preview" && (
                   <div className="space-y-6">
                     <div className="bg-[var(--card)] rounded-lg p-8 text-center">
-                      <div className="w-full h-64 bg-[var(--sand)] rounded flex items-center justify-center">
-                        <div className="text-[var(--muted)]">
-                          <div className="text-4xl mb-2">🖼️</div>
-                          <p>Project Preview</p>
-                          <p className="text-sm">Image carousel would go here</p>
+                      {previewSrc && !previewFailed ? (
+                        <div className="relative w-full h-64 rounded overflow-hidden">
+                          <Image
+                            src={previewSrc}
+                            alt={`${project.title} screenshot`}
+                            fill
+                            sizes="(min-width: 1024px) 50vw, 100vw"
+                            className="object-cover"
+                            onError={() => {
+                              if (process.env.NODE_ENV !== "production") {
+                                console.warn("Project preview failed to load:", previewSrc);
+                              }
+                              setPreviewFailed(true);
+                            }}
+                          />
                         </div>
-                      </div>
+                      ) : (
+                        <div className="w-full h-64 bg-[var(--sand)] rounded flex items-center justify-center">
+                          <div className="text-[var(--muted)]">
+                            <div className="text-4xl mb-2">🖼️</div>
+                            <p>Project Preview</p>
+                            <p className="text-sm">Screenshot unavailable</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                     <p className="text-center text-[var(--muted)]">
                       Screenshots and demo images of {project.title}

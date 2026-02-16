@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { Project } from "@/data/projects";
 import { useTheme } from "./ThemeProvider";
 import { motion } from "framer-motion";
@@ -11,6 +13,8 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, onClick }: ProjectCardProps) {
   const { isHud } = useTheme();
+  const [imageFailed, setImageFailed] = useState(false);
+  const thumbnailSrc = project.thumbnailSrc ?? project.image;
 
   return (
     <motion.div
@@ -28,9 +32,25 @@ export function ProjectCard({ project, onClick }: ProjectCardProps) {
           ? "border border-[var(--border)] group-hover:border-[var(--foreground)]"
           : "bg-[var(--card)] border border-[var(--border)] group-hover:border-[var(--accent)]"
       }`}>
-        <div className="absolute inset-0 bg-gradient-to-br from-[var(--sand)] to-[var(--card)] flex items-center justify-center">
-          <div className="text-4xl">🖼️</div>
-        </div>
+        {thumbnailSrc && !imageFailed ? (
+          <Image
+            src={thumbnailSrc}
+            alt={`${project.title} preview`}
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            className="object-cover"
+            onError={() => {
+              if (process.env.NODE_ENV !== "production") {
+                console.warn("Project thumbnail failed to load:", thumbnailSrc);
+              }
+              setImageFailed(true);
+            }}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-[var(--sand)] to-[var(--card)] flex items-center justify-center">
+            <div className="text-4xl">🖼️</div>
+          </div>
+        )}
         
         <div className={`absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100`}>
           <span className={`px-4 py-2 rounded-lg font-medium ${
