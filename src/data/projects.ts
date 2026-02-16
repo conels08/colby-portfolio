@@ -9,6 +9,8 @@ export interface Project {
   techStack: string[];
   role: string;
   image: string;
+  thumbnailSrc?: string;
+  previewSrc?: string;
   achievements: string[];
   overview: {
     whatItIs: string;
@@ -27,7 +29,9 @@ export const projects: Project[] = [
     category: "client",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     role: "Full-Stack Developer",
-    image: "/images/minute-maids.jpg",
+    image: "/projects/minute-maids.png",
+    thumbnailSrc: "/projects/minute-maids.png",
+    previewSrc: "/projects/minute-maids.png",
     achievements: [
       "Increased client inquiries by 40% with optimized conversion funnel",
       "Built responsive design that works flawlessly across all devices",
@@ -49,7 +53,9 @@ export const projects: Project[] = [
     category: "client",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
     role: "Full-Stack Developer",
-    image: "/images/posh.jpg",
+    image: "/projects/posh.png",
+    thumbnailSrc: "/projects/posh.png",
+    previewSrc: "/projects/posh.png",
     achievements: [
       "Created elegant, luxury-focused brand presentation",
       "Integrated Stripe payments for premium service bookings",
@@ -71,7 +77,9 @@ export const projects: Project[] = [
     category: "full-stack",
     techStack: ["Next.js", "TypeScript", "PWA", "Chart.js"],
     role: "Full-Stack Developer",
-    image: "/images/quit-smoking.jpg",
+    image: "/projects/quit-smoking-tracker.png",
+    thumbnailSrc: "/projects/quit-smoking-tracker.png",
+    previewSrc: "/projects/quit-smoking-tracker.png",
     achievements: [
       "Built complete PWA with offline functionality",
       "Implemented progress tracking and analytics dashboard",
