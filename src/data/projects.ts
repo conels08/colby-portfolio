@@ -11,6 +11,7 @@ export interface Project {
   image: string;
   thumbnailSrc?: string;
   previewSrc?: string;
+  previewGallery?: string[];
   achievements: string[];
   overview: {
     whatItIs: string;
@@ -29,9 +30,20 @@ export const projects: Project[] = [
     category: "client",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     role: "Full-Stack Developer",
-    image: "/projects/minute-maids.png",
-    thumbnailSrc: "/projects/minute-maids.png",
-    previewSrc: "/projects/minute-maids.png",
+    image: "/projects/Minute-Maids/minute-maids.png",
+    thumbnailSrc: "/projects/Minute-Maids/minute-maids.png",
+    previewSrc: "/projects/Minute-Maids/minute-maids.png",
+    previewGallery: [
+      "/projects/Minute-Maids/minute-maids-carousel-1.png",
+      "/projects/Minute-Maids/minute-maids-carousel-2.png",
+      "/projects/Minute-Maids/minute-maids-carousel-3.png",
+      "/projects/Minute-Maids/minute-maids-carousel-4.png",
+      "/projects/Minute-Maids/minute-maids-carousel-5.png",
+      "/projects/Minute-Maids/minute-maids-carousel-6.png",
+      "/projects/Minute-Maids/minute-maids-carousel-7.png",
+      "/projects/Minute-Maids/minute-maids-carousel-8.png",
+      "/projects/Minute-Maids/minute-maids-carousel-9.png",
+    ],
     achievements: [
       "Increased client inquiries by 40% with optimized conversion funnel",
       "Built responsive design that works flawlessly across all devices",
@@ -53,9 +65,17 @@ export const projects: Project[] = [
     category: "client",
     techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
     role: "Full-Stack Developer",
-    image: "/projects/posh.png",
-    thumbnailSrc: "/projects/posh.png",
-    previewSrc: "/projects/posh.png",
+    image: "/projects/Posh/posh.png",
+    thumbnailSrc: "/projects/Posh/posh.png",
+    previewSrc: "/projects/Posh/posh.png",
+    previewGallery: [
+      "/projects/Posh/posh-carousel-1.png",
+      "/projects/Posh/posh-carousel-2.png",
+      "/projects/Posh/posh-carousel-3.png",
+      "/projects/Posh/posh-carousel-4.png",
+      "/projects/Posh/posh-carousel-5.png",
+      "/projects/Posh/posh-carousel-6.png",
+    ],
     achievements: [
       "Created elegant, luxury-focused brand presentation",
       "Integrated Stripe payments for premium service bookings",
@@ -77,9 +97,19 @@ export const projects: Project[] = [
     category: "full-stack",
     techStack: ["Next.js", "TypeScript", "PWA", "Chart.js"],
     role: "Full-Stack Developer",
-    image: "/projects/quit-smoking-tracker.png",
-    thumbnailSrc: "/projects/quit-smoking-tracker.png",
-    previewSrc: "/projects/quit-smoking-tracker.png",
+    image: "/projects/Quit-Smoking-Tracker/quit-smoking-tracker.png",
+    thumbnailSrc: "/projects/Quit-Smoking-Tracker/quit-smoking-tracker.png",
+    previewSrc: "/projects/Quit-Smoking-Tracker/quit-smoking-tracker.png",
+    previewGallery: [
+      "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-1.png",
+      "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-2.png",
+      "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-3.png",
+      "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-4.png",
+      "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-5.png",
+      "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-6.png",
+      "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-7.png",
+      "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-8.png",
+    ],
     achievements: [
       "Built complete PWA with offline functionality",
       "Implemented progress tracking and analytics dashboard",

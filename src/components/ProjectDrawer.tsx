@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Project } from "@/data/projects";
 import { useTheme } from "./ThemeProvider";
 
@@ -24,7 +24,13 @@ export function ProjectDrawer({
 }: ProjectDrawerProps) {
   const { isHud } = useTheme();
   const [previewFailed, setPreviewFailed] = useState(false);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [failedSlides, setFailedSlides] = useState<Record<number, boolean>>({});
   const previewSrc = project?.previewSrc ?? project?.thumbnailSrc ?? project?.image ?? "";
+  const previewGallery = project?.previewGallery ?? [];
+  const hasPreviewGallery = previewGallery.length > 0;
+  const currentSlideSrc = hasPreviewGallery ? previewGallery[carouselIndex] : previewSrc;
+  const currentSlideFailed = hasPreviewGallery ? !!failedSlides[carouselIndex] : previewFailed;
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -46,10 +52,24 @@ export function ProjectDrawer({
 
   useEffect(() => {
     if (isOpen) {
-      const timer = setTimeout(() => setPreviewFailed(false), 0);
+      const timer = setTimeout(() => {
+        setPreviewFailed(false);
+        setCarouselIndex(0);
+        setFailedSlides({});
+      }, 0);
       return () => clearTimeout(timer);
     }
   }, [isOpen, project?.id]);
+
+  const goToNextSlide = () => {
+    if (!hasPreviewGallery) return;
+    setCarouselIndex((prev) => (prev + 1) % previewGallery.length);
+  };
+
+  const goToPrevSlide = () => {
+    if (!hasPreviewGallery) return;
+    setCarouselIndex((prev) => (prev - 1 + previewGallery.length) % previewGallery.length);
+  };
 
   const tabs = [
     { id: "overview", label: "Overview" },
@@ -182,21 +202,85 @@ export function ProjectDrawer({
                 {activeTab === "preview" && (
                   <div className="space-y-6">
                     <div className="bg-[var(--card)] rounded-lg p-8 text-center">
-                      {previewSrc && !previewFailed ? (
-                        <div className="relative w-full h-64 rounded overflow-hidden">
-                          <Image
-                            src={previewSrc}
-                            alt={`${project.title} screenshot`}
-                            fill
-                            sizes="(min-width: 1024px) 50vw, 100vw"
-                            className="object-cover"
-                            onError={() => {
-                              if (process.env.NODE_ENV !== "production") {
-                                console.warn("Project preview failed to load:", previewSrc);
-                              }
-                              setPreviewFailed(true);
-                            }}
-                          />
+                      {currentSlideSrc && !currentSlideFailed ? (
+                        <div className="space-y-4">
+                          <div className="relative w-full h-64 rounded overflow-hidden">
+                            <AnimatePresence mode="wait">
+                              <motion.div
+                                key={currentSlideSrc}
+                                initial={{ opacity: 0.5, x: 16 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                exit={{ opacity: 0.5, x: -16 }}
+                                transition={{ duration: 0.2 }}
+                                className="absolute inset-0"
+                              >
+                                <Image
+                                  src={currentSlideSrc}
+                                  alt={`${project.title} screenshot ${carouselIndex + 1}`}
+                                  fill
+                                  sizes="(min-width: 1024px) 50vw, 100vw"
+                                  className="object-cover"
+                                  onError={() => {
+                                    if (process.env.NODE_ENV !== "production") {
+                                      console.warn("Project preview failed to load:", currentSlideSrc);
+                                    }
+                                    if (hasPreviewGallery) {
+                                      setFailedSlides((prev) => ({ ...prev, [carouselIndex]: true }));
+                                    } else {
+                                      setPreviewFailed(true);
+                                    }
+                                  }}
+                                />
+                              </motion.div>
+                            </AnimatePresence>
+                            {hasPreviewGallery && (
+                              <>
+                                <button
+                                  type="button"
+                                  onClick={goToPrevSlide}
+                                  aria-label="Previous preview image"
+                                  className={`absolute left-3 top-1/2 -translate-y-1/2 rounded-full p-2 transition-colors ${
+                                    isHud
+                                      ? "border border-[var(--foreground)] bg-[var(--background)]/80 text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+                                      : "bg-black/50 text-white hover:bg-black/70"
+                                  }`}
+                                >
+                                  <ChevronLeft size={16} />
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={goToNextSlide}
+                                  aria-label="Next preview image"
+                                  className={`absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 transition-colors ${
+                                    isHud
+                                      ? "border border-[var(--foreground)] bg-[var(--background)]/80 text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)]"
+                                      : "bg-black/50 text-white hover:bg-black/70"
+                                  }`}
+                                >
+                                  <ChevronRight size={16} />
+                                </button>
+                              </>
+                            )}
+                          </div>
+                          {hasPreviewGallery && (
+                            <div className="flex items-center justify-center gap-2">
+                              {previewGallery.map((slideSrc, index) => (
+                                <button
+                                  key={slideSrc}
+                                  type="button"
+                                  onClick={() => setCarouselIndex(index)}
+                                  aria-label={`Go to preview image ${index + 1}`}
+                                  className={`h-2 rounded-full transition-all ${
+                                    index === carouselIndex
+                                      ? isHud
+                                        ? "w-6 bg-[var(--foreground)]"
+                                        : "w-6 bg-[var(--accent)]"
+                                      : "w-2 bg-[var(--muted)]/50 hover:bg-[var(--muted)]"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          )}
                         </div>
                       ) : (
                         <div className="w-full h-64 bg-[var(--sand)] rounded flex items-center justify-center">
