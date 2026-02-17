@@ -31,6 +31,18 @@ export const metadata: Metadata = {
   },
 };
 
+const personStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Colby Nelsen",
+  url: "https://colbynelsen.com",
+  jobTitle: "Web Developer & SaaS Builder",
+  sameAs: [
+    "https://github.com/conels08",
+    "https://www.linkedin.com/in/colby-nelsen-4a8108278",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -38,6 +50,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personStructuredData) }}
+        />
+      </head>
       <body>
         <ThemeProvider>
           <Navbar />
