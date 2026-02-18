@@ -16,6 +16,11 @@ export default function HomePage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+  const [newsletterHoney, setNewsletterHoney] = useState("");
+  const [newsletterStatus, setNewsletterStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [alreadySubscribed, setAlreadySubscribed] = useState(false);
+  const [newsletterError, setNewsletterError] = useState("");
   const { isHud } = useTheme();
 
   const openProjectDrawer = (project: Project) => {
@@ -32,6 +37,50 @@ export default function HomePage() {
   const featuredProjects = projects.filter(p => p.status === "shipped").slice(0, 3);
   const newsletterTooltipCopy =
     "No spam - just occasional updates, relevant discounts, and early access to new apps and projects.";
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setNewsletterStatus("sending");
+    setAlreadySubscribed(false);
+    setNewsletterError("");
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: newsletterEmail,
+          source: "portfolio_home",
+          honey: newsletterHoney,
+        }),
+      });
+
+      const data = (await res.json()) as {
+        ok: boolean;
+        alreadySubscribed?: boolean;
+        error?: string;
+      };
+
+      if (!res.ok || !data.ok) {
+        setNewsletterStatus("error");
+        setNewsletterError(data.error ?? "Subscription failed. Please try again.");
+        return;
+      }
+
+      if (data.alreadySubscribed) {
+        setAlreadySubscribed(true);
+      }
+
+      setNewsletterStatus("success");
+      setNewsletterEmail("");
+      setNewsletterHoney("");
+    } catch {
+      setNewsletterStatus("error");
+      setNewsletterError("Subscription failed. Please try again.");
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -314,14 +363,23 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            onSubmit={(e) => {
-              e.preventDefault();
-              alert("Thanks for subscribing! (This is a demo - integrate with your email service)");
-            }}
+            onSubmit={handleNewsletterSubmit}
             className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
           >
             <input
+              type="text"
+              name="honey"
+              value={newsletterHoney}
+              onChange={(e) => setNewsletterHoney(e.target.value)}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="hidden"
+            />
+            <input
               type="email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
               placeholder="Your email"
               required
               className={`flex-1 px-4 py-3 rounded-lg border ${
@@ -332,15 +390,48 @@ export default function HomePage() {
             />
             <button
               type="submit"
+              disabled={newsletterStatus === "sending"}
               className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+                newsletterStatus === "sending"
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""
+              } ${
                 isHud
                   ? "border border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)]"
                   : "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]"
               }`}
             >
-              Subscribe
+              {newsletterStatus === "sending" ? "Subscribing..." : "Subscribe"}
             </button>
           </motion.form>
+          {newsletterStatus === "success" && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`mt-4 text-center p-3 rounded-lg text-sm ${
+                isHud
+                  ? "border border-[var(--foreground)] text-[var(--foreground)]"
+                  : "bg-green-50 text-green-700"
+              }`}
+            >
+              {alreadySubscribed
+                ? "You're already on the list - thank you!"
+                : "You're in! Thanks for subscribing."}
+            </motion.div>
+          )}
+          {newsletterStatus === "error" && (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`mt-4 text-center p-3 rounded-lg text-sm ${
+                isHud
+                  ? "border border-red-500 text-red-400"
+                  : "bg-red-50 text-red-700"
+              }`}
+            >
+              {newsletterError || "Subscription failed. Please try again."}
+            </motion.div>
+          )}
         </div>
       </section>
 
