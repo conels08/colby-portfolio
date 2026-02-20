@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { Resend } from "resend";
 import { z } from "zod";
 
 const newsletterPayloadSchema = z.object({
@@ -7,6 +8,14 @@ const newsletterPayloadSchema = z.object({
   source: z.string().trim().optional(),
   honey: z.string().optional(),
 });
+
+const escapeHtml = (value: string) =>
+  value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 
 export async function POST(req: Request) {
   try {
@@ -41,6 +50,7 @@ export async function POST(req: Request) {
     }
 
     const { email, source } = parsed.data;
+    const normalizedSource = source ?? "portfolio_home";
     const supabaseUrl = process.env.SUPABASE_URL;
     const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
@@ -61,7 +71,7 @@ export async function POST(req: Request) {
 
     const { error } = await supabase.from("newsletter_subscribers").insert({
       email,
-      source: source ?? "portfolio_home",
+      source: normalizedSource,
       status: "subscribed",
     });
 
@@ -75,6 +85,33 @@ export async function POST(req: Request) {
         { ok: false, error: "Failed to subscribe." },
         { status: 500 }
       );
+    }
+
+    const resendKey = process.env.RESEND_API_KEY;
+    const notifyTo = process.env.NEWSLETTER_NOTIFY_TO;
+
+    if (!resendKey || !notifyTo) {
+      console.error(
+        "Newsletter notification skipped: missing RESEND_API_KEY or NEWSLETTER_NOTIFY_TO."
+      );
+    } else {
+      const resend = new Resend(resendKey);
+      const timestamp = new Date().toISOString();
+      const { error: sendError } = await resend.emails.send({
+        from: "Colby Portfolio <onboarding@resend.dev>",
+        to: [notifyTo],
+        subject: "New Newsletter Subscriber",
+        html: `
+          <p>New subscriber:</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Source:</strong> ${escapeHtml(normalizedSource)}</p>
+          <p><strong>Timestamp:</strong> ${timestamp}</p>
+        `,
+      });
+
+      if (sendError) {
+        console.error("Newsletter notification send failed:", sendError);
+      }
     }
 
     return NextResponse.json({ ok: true });
