@@ -19,11 +19,21 @@ export const metadata: Metadata = {
     description: "I build polished websites and full-stack web apps — fast.",
     type: "website",
     url: "https://colbynelsen.com",
+    siteName: "Colby Nelsen Portfolio",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Colby Nelsen Portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Colby Nelsen - Full-Stack Developer & Web Designer",
     description: "I build polished websites and full-stack web apps — fast.",
+    images: ["/twitter-image"],
   },
   robots: {
     index: true,
