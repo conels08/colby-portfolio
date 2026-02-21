@@ -7,6 +7,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://colbynelsen.com"),
+  manifest: "/site.webmanifest",
   title: "Colby Nelsen - Full-Stack Developer & Web Designer",
   description: "I build polished websites and full-stack web apps — fast. Modern Next.js builds with clean UX, strong fundamentals, and performance-first execution.",
   alternates: {
@@ -14,6 +15,14 @@ export const metadata: Metadata = {
   },
   keywords: ["Next.js", "Full-Stack", "Web Development", "React", "TypeScript", "Tailwind CSS", "Portfolio"],
   authors: [{ name: "Colby Nelsen" }],
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     title: "Colby Nelsen - Full-Stack Developer & Web Designer",
     description: "I build polished websites and full-stack web apps — fast.",
