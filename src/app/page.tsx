@@ -378,8 +378,11 @@ export default function HomePage() {
             />
             <input
               type="email"
+              id="newsletter-email"
+              name="email"
               value={newsletterEmail}
               onChange={(e) => setNewsletterEmail(e.target.value)}
+              autoComplete="email"
               placeholder="Your email"
               required
               className={`flex-1 px-4 py-3 rounded-lg border ${
