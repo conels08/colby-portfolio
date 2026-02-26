@@ -10,8 +10,6 @@ import { ProjectDrawer } from "@/components/ProjectDrawer";
 import { Project } from "@/data/projects";
 import { useTheme } from "@/components/ThemeProvider";
 
-export const dynamic = 'force-dynamic';
-
 export default function HomePage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);

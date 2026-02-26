@@ -4,8 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useTheme } from "@/components/ThemeProvider";
 
-export const dynamic = 'force-dynamic';
-
 export default function AboutPage() {
   const { isHud } = useTheme();
 

@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { services } from "@/data/projects";
 import { useTheme } from "@/components/ThemeProvider";
 
-export const dynamic = 'force-dynamic';
-
 export default function ServicesPage() {
   const { isHud } = useTheme();
 

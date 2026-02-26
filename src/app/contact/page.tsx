@@ -4,8 +4,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/components/ThemeProvider";
 
-export const dynamic = 'force-dynamic';
-
 export default function ContactPage() {
   const { isHud } = useTheme();
   const [formData, setFormData] = useState({
