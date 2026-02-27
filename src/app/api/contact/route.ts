@@ -1,21 +1,57 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import { z } from "zod";
+import { rejectInvalidOrigin, rejectRateLimited } from "@/lib/security";
+
+const contactPayloadSchema = z.object({
+  name: z.string().trim().min(1).max(120),
+  email: z.string().trim().email().max(254),
+  message: z.string().trim().min(1).max(5000),
+  company: z.string().trim().max(120).optional(),
+  website: z.string().trim().max(2048).optional(),
+  honey: z.string().optional(),
+});
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message, company, website, honey } = await req.json();
-
-    // Honeypot: if filled, silently succeed (bot trap)
-    if (honey) {
-      return NextResponse.json({ ok: true });
+    const originError = rejectInvalidOrigin(req);
+    if (originError) {
+      return originError;
     }
 
-    // Basic validation
-    if (!name || !email || !message) {
+    const rateLimitError = rejectRateLimited(req, {
+      key: "contact",
+      maxRequests: 5,
+      windowMs: 60_000,
+    });
+    if (rateLimitError) {
+      return rateLimitError;
+    }
+
+    let rawPayload: unknown;
+    try {
+      rawPayload = await req.json();
+    } catch {
       return NextResponse.json(
-        { ok: false, error: "Missing required fields." },
+        { ok: false, error: "Invalid request payload." },
         { status: 400 }
       );
+    }
+
+    const parsed = contactPayloadSchema.safeParse(rawPayload);
+
+    if (!parsed.success) {
+      return NextResponse.json(
+        { ok: false, error: "Please complete all required fields correctly." },
+        { status: 400 }
+      );
+    }
+
+    const { name, email, message, company, website, honey } = parsed.data;
+
+    // Honeypot: if filled, silently succeed (bot trap)
+    if (honey && honey.trim().length > 0) {
+      return NextResponse.json({ ok: true });
     }
 
     const resendKey = process.env.RESEND_API_KEY;

@@ -2,10 +2,11 @@ import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { z } from "zod";
+import { rejectInvalidOrigin, rejectRateLimited } from "@/lib/security";
 
 const newsletterPayloadSchema = z.object({
   email: z.string().trim().email().max(254),
-  source: z.string().trim().optional(),
+  source: z.string().trim().max(120).optional(),
   honey: z.string().optional(),
 });
 
@@ -19,6 +20,20 @@ const escapeHtml = (value: string) =>
 
 export async function POST(req: Request) {
   try {
+    const originError = rejectInvalidOrigin(req);
+    if (originError) {
+      return originError;
+    }
+
+    const rateLimitError = rejectRateLimited(req, {
+      key: "newsletter",
+      maxRequests: 8,
+      windowMs: 60_000,
+    });
+    if (rateLimitError) {
+      return rateLimitError;
+    }
+
     let rawPayload: unknown;
     try {
       rawPayload = await req.json();
