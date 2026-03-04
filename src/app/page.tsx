@@ -374,6 +374,9 @@ export default function HomePage() {
               aria-hidden="true"
               className="hidden"
             />
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address for newsletter updates
+            </label>
             <input
               type="email"
               id="newsletter-email"

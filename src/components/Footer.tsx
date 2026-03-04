@@ -12,6 +12,8 @@ export function Footer() {
     { href: "https://www.linkedin.com/in/colbynelsen", label: "LinkedIn" },
     { href: "https://calendly.com/colbynelsen/30min", label: "Calendly" },
     { href: "https://www.fiverr.com/colbynelsen", label: "Fiverr" },
+    { href: "/privacy", label: "Privacy" },
+    { href: "/terms", label: "Terms" },
   ];
 
   return (
@@ -19,19 +21,26 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex flex-wrap items-center justify-center gap-6">
-            {socialLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors ${
-                  isHud ? "hud-glow" : ""
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {socialLinks.map((link) => {
+              const isExternal =
+                link.href.startsWith("http://") ||
+                link.href.startsWith("https://") ||
+                link.href.startsWith("mailto:");
+
+              return (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noopener noreferrer" : undefined}
+                  className={`text-sm text-[var(--muted)] hover:text-[var(--foreground)] transition-colors ${
+                    isHud ? "hud-glow" : ""
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <p className={`text-sm text-[var(--muted)] ${isHud ? "hud-glow" : ""}`}>
