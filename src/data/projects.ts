@@ -21,6 +21,40 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "urlray",
+    title: "URLRay.com",
+    description: "AI-powered website auditing app that scans pages, surfaces UX and technical issues, and generates prioritized fixes.",
+    liveUrl: "https://urlray.com",
+    repoUrl: "#",
+    status: "shipped",
+    category: "full-stack",
+    techStack: ["Next.js", "TypeScript", "Supabase", "AI Workflows"],
+    role: "Full-Stack Developer",
+    image: "/projects/URLRay.com/urlray-carousel-1-scan-section.png",
+    thumbnailSrc: "/projects/URLRay.com/urlray-carousel-1-scan-section.png",
+    previewSrc: "/projects/URLRay.com/urlray-carousel-1-scan-section.png",
+    previewGallery: [
+      "/projects/URLRay.com/urlray-carousel-1-scan-section.png",
+      "/projects/URLRay.com/urlray-carousel-2-fix-plan-section.png",
+      "/projects/URLRay.com/urlray-carousel-3-issues-found-section.png",
+      "/projects/URLRay.com/urlray-carousel-4-possible-improvements-section.png",
+      "/projects/URLRay.com/urlray-carousel-5-rendered-evidence-section.png",
+      "/projects/URLRay.com/urlray-carousel-6-footer-section.png",
+      "/projects/URLRay.com/urlray-carousel-7-dahboard-overview.png",
+      "/projects/URLRay.com/urlray-carousel-8-dashboard-comparison.png",
+    ],
+    achievements: [
+      "Built an AI-assisted audit workflow that turns a URL into actionable website fixes",
+      "Designed a results experience that organizes scan findings into prioritized sections",
+      "Created side-by-side evidence views to help users validate issues quickly",
+      "Shipped a productized UX around website analysis, recommendations, and comparison"
+    ],
+    overview: {
+      whatItIs: "A website review platform that scans live pages, identifies UX and technical issues, and presents fix recommendations with supporting evidence.",
+      whatIDid: "Designed and built the product experience end to end, including the scan flow, results dashboard, issue breakdowns, evidence views, and polished presentation of recommendations."
+    }
+  },
+  {
     id: "minute-maids",
     title: "Minute Maids",
     description: "Professional cleaning service website with modern design and client portal integration.",

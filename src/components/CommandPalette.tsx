@@ -84,6 +84,16 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       group: "Projects",
     },
     {
+      id: "project-urlray",
+      label: "URLRay.com",
+      action: () => {
+        window.open("https://urlray.com", "_blank");
+        handleOpenChange(false);
+      },
+      icon: "🔎",
+      group: "Projects",
+    },
+    {
       id: "project-posh",
       label: "Posh",
       action: () => {
