@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   },
 };
 
-const effectiveDate = "March 4, 2026";
+const effectiveDate = "April 2, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -70,10 +70,12 @@ export default function PrivacyPage() {
         <section className="space-y-3">
           <h2 className="text-2xl font-semibold">Cookies and Tracking</h2>
           <p className="text-[var(--muted)] leading-relaxed">
-            This website does not currently use advertising trackers or analytics
-            tracking tools such as Google Analytics, Meta Pixel, or similar
-            marketing technologies. Basic technical functionality (such as UI
-            preferences stored in your browser) may use local browser storage.
+            This website uses Vercel Web Analytics to collect anonymous,
+            aggregated usage information that helps improve site performance and
+            content. The site does not use advertising trackers such as Google
+            Analytics, Meta Pixel, or similar marketing technologies. Basic
+            technical functionality, such as theme preferences stored in your
+            browser, may use local browser storage.
           </p>
         </section>
 

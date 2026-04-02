@@ -59,7 +59,7 @@ const personStructuredData = {
   jobTitle: "Full-Stack Developer",
   sameAs: [
     "https://github.com/conels08",
-    "https://www.linkedin.com/in/colby-nelsen-4a8108278",
+    "https://www.linkedin.com/in/colbynelsen",
   ],
 };
 
@@ -68,11 +68,6 @@ const websiteStructuredData = {
   "@type": "WebSite",
   url: "https://colbynelsen.com",
   name: "Colby Nelsen Portfolio",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://colbynelsen.com/?q={search_term_string}",
-    "query-input": "required name=search_term_string",
-  },
 };
 
 export default function RootLayout({

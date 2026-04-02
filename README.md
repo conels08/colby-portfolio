@@ -8,6 +8,8 @@ Next.js App Router portfolio site for showcasing work, services, and contact flo
 - Tailwind CSS v4
 - Framer Motion
 - Lucide React
+- Resend
+- Vercel Analytics + Speed Insights
 
 ## Scripts
 
@@ -25,6 +27,8 @@ npm run lint   # run ESLint
 - `/services` -> services detail page
 - `/about` -> about page
 - `/contact` -> contact page + form UI
+- `/privacy` -> privacy policy
+- `/terms` -> terms of service
 
 ## Project Structure
 
@@ -37,9 +41,11 @@ npm run lint   # run ESLint
 │   │   ├── page.tsx                # home page
 │   │   ├── about/page.tsx          # about page
 │   │   ├── contact/page.tsx        # contact page + client-side form state
+│   │   ├── api/contact/route.ts    # validated contact form endpoint
+│   │   ├── api/newsletter/route.ts # newsletter subscription endpoint
 │   │   ├── services/page.tsx       # services page
 │   │   ├── work/page.tsx           # work page with filters + drawer
-│   │   └── favicon.ico
+│   │   └── sitemap.ts              # generated sitemap route
 │   ├── components/
 │   │   ├── ThemeProvider.tsx       # theme and HUD mode context/provider
 │   │   ├── Navbar.tsx              # navigation, mobile menu, toggles, command palette trigger
@@ -51,8 +57,9 @@ npm run lint   # run ESLint
 │       └── projects.ts             # typed project + services content source
 ├── public/
 │   ├── robots.txt
-│   ├── sitemap.xml
-│   └── *.svg                       # static icon/assets
+│   ├── site.webmanifest
+│   ├── icon.svg
+│   └── favicon/app icon assets
 ├── package.json
 ├── next.config.ts
 ├── tsconfig.json
@@ -65,4 +72,6 @@ npm run lint   # run ESLint
 
 - Content is primarily driven from `src/data/projects.ts`.
 - Theme state and HUD mode are controlled in `src/components/ThemeProvider.tsx`.
-- `src/app/contact/page.tsx` currently uses simulated form submission (no backend endpoint).
+- Contact form submissions are handled by `src/app/api/contact/route.ts`.
+- Newsletter signups are handled by `src/app/api/newsletter/route.ts`.
+- Site metadata, icons, and structured data are defined in `src/app/layout.tsx`.

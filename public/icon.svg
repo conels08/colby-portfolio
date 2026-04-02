@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">Code icon</title>
+  <desc id="desc">Transparent code symbol with balanced angle brackets and a forward slash, using an off-white stroke and a subtle dark keyline.</desc>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M84 66 46 128l38 62" stroke="#1C1917" stroke-width="44" />
+    <path d="M126 52 102 204" stroke="#1C1917" stroke-width="44" />
+    <path d="M172 66l38 62-38 62" stroke="#1C1917" stroke-width="44" />
+
+    <path d="M84 66 46 128l38 62" stroke="#FAFAF9" stroke-width="31" />
+    <path d="M126 52 102 204" stroke="#FAFAF9" stroke-width="31" />
+    <path d="M172 66l38 62-38 62" stroke="#FAFAF9" stroke-width="31" />
+  </g>
+</svg>

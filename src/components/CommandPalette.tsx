@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useTheme } from "./ThemeProvider";
@@ -20,12 +20,15 @@ interface CommandPaletteProps {
 
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const router = useRouter();
   const { theme, toggleTheme, toggleMode } = useTheme();
+  const commandRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   const handleOpenChange = useCallback(
     (nextOpen: boolean) => {
       if (!nextOpen) {
         setQuery("");
+        setSelectedIndex(0);
       }
       onOpenChange(nextOpen);
     },
@@ -189,6 +192,20 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
     groups[cmd.group] = group;
     return groups;
   }, {} as Record<string, Command[]>);
+  const activeCommandIndex =
+    filteredCommands.length === 0
+      ? 0
+      : Math.min(selectedIndex, filteredCommands.length - 1);
+  const activeCommandId = filteredCommands[activeCommandIndex]?.id;
+
+  useEffect(() => {
+    const activeCommand = filteredCommands[activeCommandIndex];
+    if (!activeCommand) return;
+
+    commandRefs.current[activeCommand.id]?.scrollIntoView({
+      block: "nearest",
+    });
+  }, [activeCommandIndex, filteredCommands]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -207,6 +224,31 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       document.body.style.overflow = "unset";
     };
   }, [open, handleOpenChange]);
+
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (filteredCommands.length === 0) {
+      return;
+    }
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelectedIndex((currentIndex) => (currentIndex + 1) % filteredCommands.length);
+      return;
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelectedIndex((currentIndex) =>
+        (currentIndex - 1 + filteredCommands.length) % filteredCommands.length
+      );
+      return;
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+      filteredCommands[selectedIndex]?.action();
+    }
+  };
 
   return (
     <AnimatePresence>
@@ -246,7 +288,11 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                 type="text"
                 placeholder="Type a command..."
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                  setSelectedIndex(0);
+                }}
+                onKeyDown={handleInputKeyDown}
                 className="flex-1 bg-transparent text-[var(--foreground)] placeholder-[var(--muted)] focus:outline-none"
                 autoFocus
               />
@@ -262,8 +308,21 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
                   {commands.map((cmd) => (
                     <button
                       key={cmd.id}
+                      ref={(node) => {
+                        commandRefs.current[cmd.id] = node;
+                      }}
                       onClick={cmd.action}
-                      className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-[var(--card)] transition-colors text-[var(--foreground)]"
+                      onMouseEnter={() => {
+                        const index = filteredCommands.findIndex((candidate) => candidate.id === cmd.id);
+                        if (index >= 0) {
+                          setSelectedIndex(index);
+                        }
+                      }}
+                      className={`w-full flex items-center gap-3 px-4 py-2 text-left transition-colors text-[var(--foreground)] ${
+                        activeCommandId === cmd.id
+                          ? "bg-[var(--card)]"
+                          : "hover:bg-[var(--card)]"
+                      }`}
                     >
                       <span className="text-base">{cmd.icon}</span>
                       <span className="flex-1">{cmd.label}</span>
