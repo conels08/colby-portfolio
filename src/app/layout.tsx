@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://colbynelsen.com"),
@@ -99,6 +100,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </ThemeProvider>
+        <Analytics />
         <SpeedInsights />
       </body>
     </html>
