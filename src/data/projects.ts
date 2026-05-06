@@ -214,6 +214,17 @@ export const services = [
     ]
   },
   {
+    title: "AI & Automation",
+    description: "Custom AI agents and automations that eliminate repetitive work and plug directly into your tools and workflows.",
+    features: [
+      "AI-powered workflows",
+      "Custom agent development",
+      "API and tool integrations",
+      "Process automation",
+      "ChatGPT / Claude integration"
+    ]
+  },
+  {
     title: "Full-Stack MVPs",
     description: "Complete web applications built to validate your ideas and scale with your business growth.",
     features: [
