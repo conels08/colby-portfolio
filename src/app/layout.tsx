@@ -9,12 +9,12 @@ import { Analytics } from "@vercel/analytics/next";
 export const metadata: Metadata = {
   metadataBase: new URL("https://colbynelsen.com"),
   manifest: "/site.webmanifest",
-  title: "Colby Nelsen - Full-Stack Developer & Web Designer",
-  description: "I build polished websites and full-stack web apps — fast. Modern Next.js builds with clean UX, strong fundamentals, and performance-first execution.",
+  title: "Colby Nelsen — AI Web Apps & Automations",
+  description: "I build AI-powered web apps and automations for businesses that want to move fast. Next.js, TypeScript, and AI — built clean, shipped fast, and designed to grow with you.",
   alternates: {
     canonical: "/",
   },
-  keywords: ["Next.js", "Full-Stack", "Web Development", "React", "TypeScript", "Tailwind CSS", "Portfolio"],
+  keywords: ["Next.js", "Full-Stack", "Web Development", "React", "TypeScript", "Tailwind CSS", "Portfolio", "AI", "Automation", "AI Agents"],
   authors: [{ name: "Colby Nelsen" }],
   icons: {
     icon: [
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   openGraph: {
-    title: "Colby Nelsen - Full-Stack Developer & Web Designer",
-    description: "I build polished websites and full-stack web apps — fast.",
+    title: "Colby Nelsen — AI Web Apps & Automations",
+    description: "AI-powered web apps and automations, built fast.",
     type: "website",
     url: "https://colbynelsen.com",
     siteName: "Colby Nelsen Portfolio",
@@ -41,8 +41,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Colby Nelsen - Full-Stack Developer & Web Designer",
-    description: "I build polished websites and full-stack web apps — fast.",
+    title: "Colby Nelsen — AI Web Apps & Automations",
+    description: "AI-powered web apps and automations, built fast.",
     images: ["/twitter-image"],
   },
   robots: {
@@ -56,7 +56,7 @@ const personStructuredData = {
   "@type": "Person",
   name: "Colby Nelsen",
   url: "https://colbynelsen.com",
-  jobTitle: "Full-Stack Developer",
+  jobTitle: "Full-Stack Developer & AI Builder",
   sameAs: [
     "https://github.com/conels08",
     "https://www.linkedin.com/in/colbynelsen",

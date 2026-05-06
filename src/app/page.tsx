@@ -235,16 +235,13 @@ export default function HomePage() {
               }`}
             >
               <p className={`text-[var(--muted)] mb-6 italic ${isHud ? "hud-glow" : ""}`}>
-                {/* PLACEHOLDER quote */}
-                &ldquo;Placeholder testimonial quote — replace with the real client quote.&rdquo;
+                &ldquo;Colby built our salon website from scratch and completely nailed the vibe we were going for. It looks high-end, books appointments seamlessly, and our clients constantly comment on how easy it is to use. I couldn&rsquo;t be happier with how it turned out.&rdquo;
               </p>
               <p className={`font-semibold ${isHud ? "hud-glow" : ""}`}>
-                {/* PLACEHOLDER client name */}
-                Client Name
+                Cyndie Phillips, Owner
               </p>
               <p className="text-sm text-[var(--muted)]">
-                {/* PLACEHOLDER business name */}
-                Business Name
+                Posh Salon, Newberg OR
               </p>
             </motion.div>
 
