@@ -209,6 +209,73 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="py-20 px-6">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className={`text-3xl font-bold mb-4 ${isHud ? "hud-glow" : ""}`}>
+              What Clients Say
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0 }}
+              className={`p-6 rounded-lg ${
+                isHud
+                  ? "border border-[var(--border)]"
+                  : "bg-[var(--card)]"
+              }`}
+            >
+              <p className={`text-[var(--muted)] mb-6 italic ${isHud ? "hud-glow" : ""}`}>
+                {/* PLACEHOLDER quote */}
+                &ldquo;Placeholder testimonial quote — replace with the real client quote.&rdquo;
+              </p>
+              <p className={`font-semibold ${isHud ? "hud-glow" : ""}`}>
+                {/* PLACEHOLDER client name */}
+                Client Name
+              </p>
+              <p className="text-sm text-[var(--muted)]">
+                {/* PLACEHOLDER business name */}
+                Business Name
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className={`p-6 rounded-lg ${
+                isHud
+                  ? "border border-[var(--border)]"
+                  : "bg-[var(--card)]"
+              }`}
+            >
+              <p className={`text-[var(--muted)] mb-6 italic ${isHud ? "hud-glow" : ""}`}>
+                {/* PLACEHOLDER quote */}
+                &ldquo;Placeholder testimonial quote — replace with the real client quote.&rdquo;
+              </p>
+              <p className={`font-semibold ${isHud ? "hud-glow" : ""}`}>
+                {/* PLACEHOLDER client name */}
+                Client Name
+              </p>
+              <p className="text-sm text-[var(--muted)]">
+                {/* PLACEHOLDER business name */}
+                Business Name
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-20 px-6 bg-[var(--card)]">
         <div className="max-w-6xl mx-auto">
           <motion.div
