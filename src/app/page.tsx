@@ -92,12 +92,12 @@ export default function HomePage() {
             <h1 className={`text-4xl md:text-6xl font-bold mb-6 tracking-tight ${
               isHud ? "hud-glow" : ""
             }`}>
-              I build polished websites and full-stack web apps — fast.
+              I build AI-powered web apps and automations for businesses that want to move fast.
             </h1>
             <p className={`text-lg md:text-xl text-[var(--muted)] mb-8 leading-relaxed ${
               isHud ? "hud-glow" : ""
             }`}>
-              Modern Next.js builds with clean UX, strong fundamentals, and performance-first execution.
+              Next.js, TypeScript, and AI — built clean, shipped fast, and designed to grow with you.
             </p>
           </motion.div>
 
