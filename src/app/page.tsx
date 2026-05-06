@@ -108,26 +108,16 @@ export default function HomePage() {
             className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
           >
             <Link
-              href="/contact"
+              href="https://calendly.com/colbynelsen/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`px-6 py-3 rounded-lg font-medium transition-colors ${
                 isHud
                   ? "border border-[var(--foreground)] text-[var(--foreground)] hover:bg-[var(--foreground)] hover:text-[var(--background)]"
                   : "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]"
               }`}
             >
-              Get a Quote
-            </Link>
-            <Link
-              href="https://calendly.com/colbynelsen/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`px-6 py-3 rounded-lg font-medium transition-colors ${
-                isHud
-                  ? "border border-[var(--border)] text-[var(--muted)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]"
-                  : "border border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--foreground)]"
-              }`}
-            >
-              Book Colby
+              Book a Free Call
             </Link>
           </motion.div>
 
