@@ -67,7 +67,7 @@ export async function POST(req: Request) {
 
     const resend = new Resend(resendKey);
 
-    const subject = `Portfolio inquiry from ${name}`;
+    const subject = `New inquiry from ${name} — Root Labs`;
     const text = [
       `Name: ${name}`,
       `Email: ${email}`,
@@ -83,9 +83,9 @@ export async function POST(req: Request) {
       .join("\n");
 
     const { error } = await resend.emails.send({
-      from: "Colby Portfolio <onboarding@resend.dev>",
+      from: "Colby Nelsen | Root Labs <onboarding@resend.dev>",
       to: [toEmail],
-      replyTo: email, // so you can hit Reply in Gmail
+      replyTo: email,
       subject,
       text,
     });
@@ -97,6 +97,31 @@ export async function POST(req: Request) {
         { status: 502 }
       );
     }
+
+    // Auto-reply confirmation to the person who submitted
+    const autoReplyText = [
+      `Hi ${name},`,
+      "",
+      "Thanks for reaching out — your message came through successfully.",
+      "",
+      "I typically respond within 24 hours. In the meantime, feel free to book a call directly:",
+      "https://calendly.com/colbynelsen/30min",
+      "",
+      "Talk soon,",
+      "Colby Nelsen",
+      "Founder & Developer — Root Labs",
+      "colby@rootlabs.io | rootlabs.io",
+    ].join("\n");
+
+    // Best-effort — don't fail the request if this errors
+    await resend.emails.send({
+      from: "Colby Nelsen | Root Labs <onboarding@resend.dev>",
+      to: [email],
+      subject: "Got your message — I'll be in touch soon",
+      text: autoReplyText,
+    }).catch((autoReplyErr) => {
+      console.error("Auto-reply failed (non-blocking):", autoReplyErr);
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {

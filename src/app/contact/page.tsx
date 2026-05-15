@@ -102,10 +102,10 @@ export default function ContactPage() {
                   Email
                 </h3>
                 <a
-                  href="mailto:colbynelsen@gmail.com"
+                  href="mailto:colby@rootlabs.io"
                   className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
                 >
-                  colbynelsen@gmail.com
+                  colby@rootlabs.io
                 </a>
               </div>
 
