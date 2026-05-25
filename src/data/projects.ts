@@ -88,38 +88,6 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "posh",
-    title: "Posh",
-    description: "Boutique website for luxury salon with appointment booking and service showcase.",
-    liveUrl: "https://poshnewberg.com",
-    repoUrl: "https://github.com/conels08/posh-site",
-    status: "shipped",
-    category: "client",
-    techStack: ["HTML", "CSS", "JavaScript", "Netlify"],
-    role: "Full-Stack Developer",
-    image: "/projects/Posh/posh.png",
-    thumbnailSrc: "/projects/Posh/posh.png",
-    previewSrc: "/projects/Posh/posh.png",
-    previewGallery: [
-      "/projects/Posh/posh-carousel-1.png",
-      "/projects/Posh/posh-carousel-2.png",
-      "/projects/Posh/posh-carousel-3.png",
-      "/projects/Posh/posh-carousel-4.png",
-      "/projects/Posh/posh-carousel-5.png",
-      "/projects/Posh/posh-carousel-6.png",
-    ],
-    achievements: [
-      "Created elegant, luxury-focused brand presentation",
-      "Built artist directory with dynamic filtering by service type",
-      "Achieved 98+ Lighthouse performance score",
-      "Built mobile-first responsive experience"
-    ],
-    overview: {
-      whatItIs: "A sophisticated website for a high-end salon, showcasing services, stylists, and linking visitors to each artist's individual booking system.",
-      whatIDid: "Designed and developed the complete site in vanilla HTML, CSS, and JavaScript — no framework, no build tooling. Focused on luxury aesthetics, fast load times, and a clean artist directory experience."
-    }
-  },
-  {
     id: "quit-smoking",
     title: "Quit Smoking Tracker",
     description: "Progressive web app to help users track their smoking cessation journey with analytics and motivation.",
@@ -151,6 +119,38 @@ export const projects: Project[] = [
     overview: {
       whatItIs: "A smoke-cessation tracking web app where users log their quit date, track daily check-ins, and watch milestones unlock over time. Includes a demo mode so anyone can explore the experience without signing up.",
       whatIDid: "Built the full stack — auth with NextAuth, Prisma ORM against Supabase Postgres, protected API routes, daily check-in system, milestone calculations, demo mode with sample data, and email list capture with Kit integration."
+    }
+  },
+  {
+    id: "posh",
+    title: "Posh",
+    description: "Boutique website for luxury salon with appointment booking and service showcase.",
+    liveUrl: "https://poshnewberg.com",
+    repoUrl: "https://github.com/conels08/posh-site",
+    status: "shipped",
+    category: "client",
+    techStack: ["HTML", "CSS", "JavaScript", "Netlify"],
+    role: "Full-Stack Developer",
+    image: "/projects/Posh/posh.png",
+    thumbnailSrc: "/projects/Posh/posh.png",
+    previewSrc: "/projects/Posh/posh.png",
+    previewGallery: [
+      "/projects/Posh/posh-carousel-1.png",
+      "/projects/Posh/posh-carousel-2.png",
+      "/projects/Posh/posh-carousel-3.png",
+      "/projects/Posh/posh-carousel-4.png",
+      "/projects/Posh/posh-carousel-5.png",
+      "/projects/Posh/posh-carousel-6.png",
+    ],
+    achievements: [
+      "Created elegant, luxury-focused brand presentation",
+      "Built artist directory with dynamic filtering by service type",
+      "Achieved 98+ Lighthouse performance score",
+      "Built mobile-first responsive experience"
+    ],
+    overview: {
+      whatItIs: "A sophisticated website for a high-end salon, showcasing services, stylists, and linking visitors to each artist's individual booking system.",
+      whatIDid: "Designed and developed the complete site in vanilla HTML, CSS, and JavaScript — no framework, no build tooling. Focused on luxury aesthetics, fast load times, and a clean artist directory experience."
     }
   },
   {
