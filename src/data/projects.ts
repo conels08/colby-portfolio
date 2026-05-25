@@ -77,14 +77,14 @@ export const projects: Project[] = [
       "/projects/Minute-Maids/minute-maids-carousel-9.png",
     ],
     achievements: [
-      "Increased client inquiries by 40% with optimized conversion funnel",
+      "Gave the business its first professional web presence — clients can now find and refer the service online",
+      "Built a conversion-focused layout that turns visitors into direct booking inquiries",
       "Built responsive design that works flawlessly across all devices",
-      "Integrated client portal for seamless service management",
       "Implemented SEO best practices for local search visibility"
     ],
     overview: {
-      whatItIs: "A complete digital presence for a professional cleaning service, featuring service showcases, booking integration, and client management portal.",
-      whatIDid: "Developed the full website from concept to deployment, including responsive design, performance optimization, and client portal integration. Focused on conversion optimization and user experience."
+      whatItIs: "A complete digital presence for a professional cleaning service, featuring service showcases, pricing, and a direct contact and booking flow.",
+      whatIDid: "Developed the full website from concept to deployment, including responsive design, performance optimization, and a conversion-focused layout. Gave the business a credible online presence it could grow from."
     }
   },
   {
@@ -95,7 +95,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/conels08/posh-site",
     status: "shipped",
     category: "client",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
+    techStack: ["HTML", "CSS", "JavaScript", "Netlify"],
     role: "Full-Stack Developer",
     image: "/projects/Posh/posh.png",
     thumbnailSrc: "/projects/Posh/posh.png",
@@ -110,13 +110,13 @@ export const projects: Project[] = [
     ],
     achievements: [
       "Created elegant, luxury-focused brand presentation",
-      "Integrated Stripe payments for premium service bookings",
+      "Built artist directory with dynamic filtering by service type",
       "Achieved 98+ Lighthouse performance score",
       "Built mobile-first responsive experience"
     ],
     overview: {
-      whatItIs: "A sophisticated website for a high-end salon, showcasing services, stylists, and facilitating online appointment bookings with premium user experience.",
-      whatIDid: "Designed and developed the complete digital experience, emphasizing luxury aesthetics and seamless booking flow. Integrated payment processing and optimized for conversions."
+      whatItIs: "A sophisticated website for a high-end salon, showcasing services, stylists, and linking visitors to each artist's individual booking system.",
+      whatIDid: "Designed and developed the complete site in vanilla HTML, CSS, and JavaScript — no framework, no build tooling. Focused on luxury aesthetics, fast load times, and a clean artist directory experience."
     }
   },
   {
@@ -157,22 +157,22 @@ export const projects: Project[] = [
     id: "collections-autopilot",
     title: "Collections Autopilot",
     description: "Automated collections management system for small businesses with invoice tracking and payment automation.",
-    liveUrl: "#",
-    repoUrl: "#",
+    liveUrl: "https://collections-autopilot.vercel.app",
+    repoUrl: "https://github.com/conels08/collections-autopilot",
     status: "in-progress",
     category: "full-stack",
     techStack: ["Next.js", "TypeScript", "Prisma", "Stripe", "PostgreSQL"],
     role: "Full-Stack Developer",
     image: "/images/collections.jpg",
     achievements: [
-      "Designed robust data model for complex financial workflows",
-      "Implemented automated payment retry logic",
-      "Built comprehensive dashboard for business owners",
-      "Created API integrations with accounting software"
+      "Built invoice tracking system with automated follow-up email sequences via Resend",
+      "Implemented snooze and mark-paid workflows to manage collections without manual effort",
+      "Designed a clean dashboard giving business owners a real-time view of outstanding invoices",
+      "Architected full auth flow, Supabase backend, and server-side data layer in Next.js"
     ],
     overview: {
-      whatItIs: "A comprehensive collections management platform that automates invoice follow-ups, payment tracking, and customer communication for small businesses.",
-      whatIDid: "Currently developing the full-stack application with focus on automation, reliability, and user experience. Building robust backend systems and intuitive management interfaces."
+      whatItIs: "An invoice and collections management tool that automates follow-up emails, tracks payment status, and gives small business owners a clear view of what they're owed.",
+      whatIDid: "Built the full application — auth, invoice CRUD, automated follow-up email system, snooze/mark-paid workflows, and a business owner dashboard. Integrated Resend for transactional email and Supabase for the backend."
     }
   },
   {
@@ -180,7 +180,7 @@ export const projects: Project[] = [
     title: "ChoreSpace",
     description: "Family chore management platform with task assignments, point systems, and progress tracking.",
     liveUrl: "#",
-    repoUrl: "#",
+    repoUrl: "https://github.com/conels08/chores-for-the-fam",
     status: "in-progress",
     category: "full-stack",
     techStack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
