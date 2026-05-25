@@ -7,7 +7,7 @@ export function Footer() {
   const { isHud } = useTheme();
 
   const socialLinks = [
-    { href: "mailto:colbynelsen@gmail.com", label: "Email" },
+    { href: "mailto:colby@rootlabs.io", label: "Email" },
     { href: "https://github.com/conels08", label: "GitHub" },
     { href: "https://www.linkedin.com/in/colbynelsen", label: "LinkedIn" },
     { href: "https://calendly.com/colbynelsen/30min", label: "Calendly" },
@@ -44,7 +44,7 @@ export function Footer() {
           </div>
 
           <p className={`text-sm text-[var(--muted)] ${isHud ? "hud-glow" : ""}`}>
-            Built with Next.js
+            © 2026 Root Labs
           </p>
         </div>
       </div>
