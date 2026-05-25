@@ -163,7 +163,12 @@ export const projects: Project[] = [
     category: "full-stack",
     techStack: ["Next.js", "TypeScript", "Prisma", "Stripe", "PostgreSQL"],
     role: "Full-Stack Developer",
-    image: "/images/collections.jpg",
+    image: "/projects/Collections-Autopilot/collections-autopilot-dashboard.jpg",
+    thumbnailSrc: "/projects/Collections-Autopilot/collections-autopilot-dashboard.jpg",
+    previewSrc: "/projects/Collections-Autopilot/collections-autopilot-dashboard.jpg",
+    previewGallery: [
+      "/projects/Collections-Autopilot/collections-autopilot-dashboard.jpg",
+    ],
     achievements: [
       "Built invoice tracking system with automated follow-up email sequences via Resend",
       "Implemented snooze and mark-paid workflows to manage collections without manual effort",
@@ -185,7 +190,12 @@ export const projects: Project[] = [
     category: "full-stack",
     techStack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"],
     role: "Full-Stack Developer",
-    image: "/images/chorespace.jpg",
+    image: "/projects/ChoreSpace/chorespace-dashboard.jpg",
+    thumbnailSrc: "/projects/ChoreSpace/chorespace-dashboard.jpg",
+    previewSrc: "/projects/ChoreSpace/chorespace-dashboard.jpg",
+    previewGallery: [
+      "/projects/ChoreSpace/chorespace-dashboard.jpg",
+    ],
     achievements: [
       "Designed family-centric user experience",
       "Built flexible point and reward system",
