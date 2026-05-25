@@ -36,9 +36,10 @@ export const projects: Project[] = [
     previewGallery: [
       "/projects/URLRay.com/urlray-carousel-1-hero.png",
       "/projects/URLRay.com/urlray-carousel-2-before-after.png",
-      "/projects/URLRay.com/urlray-carousel-3-fix-plan.png",
-      "/projects/URLRay.com/urlray-carousel-4-dashboard.png",
+      "/projects/URLRay.com/urlray-carousel-3-scan-summary.png",
+      "/projects/URLRay.com/urlray-carousel-4-fix-plan.png",
       "/projects/URLRay.com/urlray-carousel-5-monitoring.png",
+      "/projects/URLRay.com/urlray-carousel-6-rendered-evidence.png",
     ],
     achievements: [
       "Built an AI-assisted audit workflow that turns a URL into actionable website fixes",
