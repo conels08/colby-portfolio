@@ -27,7 +27,7 @@ export function ProjectDrawer({
   const [previewFailed, setPreviewFailed] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [failedSlides, setFailedSlides] = useState<Record<number, boolean>>({});
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
   const previewSrc = project?.previewSrc ?? project?.thumbnailSrc ?? project?.image ?? "";
   const previewGallery = project?.previewGallery ?? [];
   const hasPreviewGallery = previewGallery.length > 0;
@@ -38,7 +38,7 @@ export function ProjectDrawer({
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         // Lightbox intercepts first via capture — drawer only handles if lightbox is closed
-        if (!lightboxSrc) onClose();
+        if (!lightboxOpen) onClose();
       }
     };
 
@@ -51,7 +51,7 @@ export function ProjectDrawer({
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, onClose, lightboxSrc]);
+  }, [isOpen, onClose, lightboxOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -59,7 +59,7 @@ export function ProjectDrawer({
         setPreviewFailed(false);
         setCarouselIndex(0);
         setFailedSlides({});
-        setLightboxSrc(null);
+        setLightboxOpen(false);
       }, 0);
       return () => clearTimeout(timer);
     }
@@ -210,7 +210,7 @@ export function ProjectDrawer({
                         <div className="space-y-4">
                           <div
                             className="relative w-full h-64 rounded overflow-hidden cursor-zoom-in group"
-                            onClick={() => setLightboxSrc(currentSlideSrc)}
+                            onClick={() => setLightboxOpen(true)}
                           >
                             <AnimatePresence mode="wait">
                               <motion.div
@@ -400,9 +400,12 @@ export function ProjectDrawer({
         </>
       )}
       <Lightbox
-        src={lightboxSrc}
+        isOpen={lightboxOpen}
+        gallery={previewGallery}
+        index={carouselIndex}
         alt={project?.title ?? "Project screenshot"}
-        onClose={() => setLightboxSrc(null)}
+        onClose={() => setLightboxOpen(false)}
+        onIndexChange={(i) => setCarouselIndex(i)}
       />
     </AnimatePresence>
   );
