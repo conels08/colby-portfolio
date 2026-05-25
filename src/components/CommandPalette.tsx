@@ -150,7 +150,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
       id: "open-calendly",
       label: "Open Calendly",
       action: () => {
-        window.open("https://calendly.com/colbynelsen/30min", "_blank");
+        window.open("https://calendly.com/colbynelsen/phone-meeting", "_blank");
         handleOpenChange(false);
       },
       icon: "📅",

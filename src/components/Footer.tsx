@@ -10,7 +10,7 @@ export function Footer() {
     { href: "mailto:colby@rootlabs.io", label: "Email" },
     { href: "https://github.com/conels08", label: "GitHub" },
     { href: "https://www.linkedin.com/in/colbynelsen", label: "LinkedIn" },
-    { href: "https://calendly.com/colbynelsen/30min", label: "Calendly" },
+    { href: "https://calendly.com/colbynelsen/phone-meeting", label: "Calendly" },
     { href: "https://www.fiverr.com/colbynelsen", label: "Fiverr" },
     { href: "/privacy", label: "Privacy" },
     { href: "/terms", label: "Terms" },

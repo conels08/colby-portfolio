@@ -105,7 +105,7 @@ export async function POST(req: Request) {
       "Thanks for reaching out — your message came through successfully.",
       "",
       "I typically respond within 24 hours. In the meantime, feel free to book a call directly:",
-      "https://calendly.com/colbynelsen/30min",
+      "https://calendly.com/colbynelsen/phone-meeting",
       "",
       "Talk soon,",
       "Colby Nelsen",

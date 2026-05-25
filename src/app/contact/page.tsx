@@ -114,7 +114,7 @@ export default function ContactPage() {
                   Calendly
                 </h3>
                 <a
-                  href="https://calendly.com/colbynelsen/30min"
+                  href="https://calendly.com/colbynelsen/phone-meeting"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-[var(--muted)] hover:text-[var(--foreground)] transition-colors"

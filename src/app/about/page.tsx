@@ -167,7 +167,7 @@ export default function AboutPage() {
                 Get a Quote
               </Link>
               <Link
-                href="https://calendly.com/colbynelsen/30min"
+                href="https://calendly.com/colbynelsen/phone-meeting"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`px-6 py-3 rounded-lg font-medium transition-colors ${
