@@ -127,7 +127,7 @@ export const projects: Project[] = [
     repoUrl: "https://github.com/conels08/CTO-playground",
     status: "shipped",
     category: "full-stack",
-    techStack: ["Next.js", "TypeScript", "PWA", "Chart.js"],
+    techStack: ["Next.js", "TypeScript", "Prisma", "Supabase", "NextAuth"],
     role: "Full-Stack Developer",
     image: "/projects/Quit-Smoking-Tracker/quit-smoking-tracker.png",
     thumbnailSrc: "/projects/Quit-Smoking-Tracker/quit-smoking-tracker.png",
@@ -143,14 +143,14 @@ export const projects: Project[] = [
       "/projects/Quit-Smoking-Tracker/quit-smoking-carousel-8.png",
     ],
     achievements: [
-      "Built complete PWA with offline functionality",
-      "Implemented progress tracking and analytics dashboard",
-      "Created engaging gamification elements",
-      "Achieved installable PWA with native app feel"
+      "Built full auth system with NextAuth and Supabase Postgres — sign up, sign in, session management",
+      "Implemented smart demo mode that shows real sample data without requiring sign-up",
+      "Designed daily check-in system tracking cravings, mood, and notes with per-user data scoping",
+      "Built milestone engine computing days smoke-free, money saved, and health recovery markers"
     ],
     overview: {
-      whatItIs: "A comprehensive smoking cessation tracking application that helps users monitor their progress, set goals, and maintain motivation through data visualization and achievements.",
-      whatIDid: "Architected and built the complete application including PWA features, data persistence, analytics dashboard, and engaging user interface. Focused on user retention and motivation."
+      whatItIs: "A smoke-cessation tracking web app where users log their quit date, track daily check-ins, and watch milestones unlock over time. Includes a demo mode so anyone can explore the experience without signing up.",
+      whatIDid: "Built the full stack — auth with NextAuth, Prisma ORM against Supabase Postgres, protected API routes, daily check-in system, milestone calculations, demo mode with sample data, and email list capture with Kit integration."
     }
   },
   {
