@@ -257,16 +257,13 @@ export default function HomePage() {
               }`}
             >
               <p className={`text-[var(--muted)] mb-6 italic ${isHud ? "hud-glow" : ""}`}>
-                {/* PLACEHOLDER quote */}
-                &ldquo;Placeholder testimonial quote — replace with the real client quote.&rdquo;
+                &ldquo;Root Labs has delivered a beautiful website, which is a great tool to provide customers with relevant flyers and ideas. The team is very creative and confident. Root Labs delivers on time and is very responsive.&rdquo;
               </p>
               <p className={`font-semibold ${isHud ? "hud-glow" : ""}`}>
-                {/* PLACEHOLDER client name */}
-                Client Name
+                Lacee Richter, Owner Operator
               </p>
               <p className="text-sm text-[var(--muted)]">
-                {/* PLACEHOLDER business name */}
-                Business Name
+                Minute Maids, Dayton OR
               </p>
             </motion.div>
           </div>
