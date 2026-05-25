@@ -3,9 +3,10 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 import { Project } from "@/data/projects";
 import { useTheme } from "./ThemeProvider";
+import { Lightbox } from "./Lightbox";
 
 interface ProjectDrawerProps {
   project: Project | null;
@@ -26,6 +27,7 @@ export function ProjectDrawer({
   const [previewFailed, setPreviewFailed] = useState(false);
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [failedSlides, setFailedSlides] = useState<Record<number, boolean>>({});
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
   const previewSrc = project?.previewSrc ?? project?.thumbnailSrc ?? project?.image ?? "";
   const previewGallery = project?.previewGallery ?? [];
   const hasPreviewGallery = previewGallery.length > 0;
@@ -35,7 +37,8 @@ export function ProjectDrawer({
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        onClose();
+        // Lightbox intercepts first via capture — drawer only handles if lightbox is closed
+        if (!lightboxSrc) onClose();
       }
     };
 
@@ -48,7 +51,7 @@ export function ProjectDrawer({
       document.removeEventListener("keydown", handleEscape);
       document.body.style.overflow = "unset";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, onClose, lightboxSrc]);
 
   useEffect(() => {
     if (isOpen) {
@@ -56,6 +59,7 @@ export function ProjectDrawer({
         setPreviewFailed(false);
         setCarouselIndex(0);
         setFailedSlides({});
+        setLightboxSrc(null);
       }, 0);
       return () => clearTimeout(timer);
     }
@@ -204,7 +208,10 @@ export function ProjectDrawer({
                     <div className="bg-[var(--card)] rounded-lg p-8 text-center">
                       {currentSlideSrc && !currentSlideFailed ? (
                         <div className="space-y-4">
-                          <div className="relative w-full h-64 rounded overflow-hidden">
+                          <div
+                            className="relative w-full h-64 rounded overflow-hidden cursor-zoom-in group"
+                            onClick={() => setLightboxSrc(currentSlideSrc)}
+                          >
                             <AnimatePresence mode="wait">
                               <motion.div
                                 key={currentSlideSrc}
@@ -233,11 +240,17 @@ export function ProjectDrawer({
                                 />
                               </motion.div>
                             </AnimatePresence>
+                            {/* Zoom hint overlay */}
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 pointer-events-none">
+                              <div className="bg-black/60 rounded-full p-2">
+                                <ZoomIn size={20} className="text-white" />
+                              </div>
+                            </div>
                             {hasPreviewGallery && (
                               <>
                                 <button
                                   type="button"
-                                  onClick={goToPrevSlide}
+                                  onClick={(e) => { e.stopPropagation(); goToPrevSlide(); }}
                                   aria-label="Previous preview image"
                                   className={`absolute left-3 top-1/2 -translate-y-1/2 rounded-full p-2 transition-colors ${
                                     isHud
@@ -249,7 +262,7 @@ export function ProjectDrawer({
                                 </button>
                                 <button
                                   type="button"
-                                  onClick={goToNextSlide}
+                                  onClick={(e) => { e.stopPropagation(); goToNextSlide(); }}
                                   aria-label="Next preview image"
                                   className={`absolute right-3 top-1/2 -translate-y-1/2 rounded-full p-2 transition-colors ${
                                     isHud
@@ -386,6 +399,11 @@ export function ProjectDrawer({
           </motion.div>
         </>
       )}
+      <Lightbox
+        src={lightboxSrc}
+        alt={project?.title ?? "Project screenshot"}
+        onClose={() => setLightboxSrc(null)}
+      />
     </AnimatePresence>
   );
 }
