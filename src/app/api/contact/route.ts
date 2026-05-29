@@ -76,7 +76,7 @@ export async function POST(req: Request) {
     const resend = new Resend(resendKey);
 
     const subject = `New inquiry from ${name} — Root Labs`;
-    const timestamp = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles", dateStyle: "medium", timeStyle: "short" });
+    const timestamp = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles", dateStyle: "medium", timeStyle: "short" }) + " PT";
 
     const notificationHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -139,7 +139,7 @@ export async function POST(req: Request) {
           </tr>
           <tr>
             <td bgcolor="#ffffff" style="background-color:#ffffff;padding:16px 40px 24px;border-top:1px solid #e5e7eb;">
-              <p style="margin:0;font-size:12px;color:#9ca3af;">Received ${timestamp} PT · colbynelsen.com</p>
+              <p style="margin:0;font-size:12px;color:#9ca3af;">Received ${timestamp} · colbynelsen.com</p>
             </td>
           </tr>
         </table>
