@@ -113,27 +113,27 @@ export async function POST(req: Request) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="margin:0;padding:0;background-color:#111111;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#111111" style="background-color:#111111;padding:40px 16px;">
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 16px;">
     <tr>
       <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;border-radius:12px;overflow:hidden;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
 
-          <!-- Header -->
+          <!-- Header: baked-in black image — Gmail cannot override image colors -->
           <tr>
-            <td bgcolor="#000000" style="background-color:#000000;padding:32px 40px;text-align:center;">
-              <img src="https://colbynelsen.com/rootlabs-logo-transparent.png" alt="Root Labs" width="160" style="display:block;margin:0 auto;" />
+            <td style="padding:0;line-height:0;font-size:0;">
+              <img src="https://colbynelsen.com/email-header.png" alt="Root Labs" width="560" style="display:block;width:100%;max-width:560px;" />
             </td>
           </tr>
 
           <!-- Body -->
           <tr>
-            <td bgcolor="#1a1a1a" style="background-color:#1a1a1a;padding:40px 40px 32px;">
-              <p style="margin:0 0 16px;font-size:16px;color:#f9fafb;">Hi ${escapeHtml(name)},</p>
-              <p style="margin:0 0 16px;font-size:16px;color:#d1d5db;line-height:1.6;">
+            <td bgcolor="#ffffff" style="background-color:#ffffff;padding:40px 40px 32px;">
+              <p style="margin:0 0 16px;font-size:16px;color:#111827;">Hi ${escapeHtml(name)},</p>
+              <p style="margin:0 0 16px;font-size:16px;color:#374151;line-height:1.6;">
                 Your message came through — thanks for reaching out. I'll get back to you within 24 hours.
               </p>
-              <p style="margin:0 0 32px;font-size:16px;color:#d1d5db;line-height:1.6;">
+              <p style="margin:0 0 32px;font-size:16px;color:#374151;line-height:1.6;">
                 In the meantime, feel free to book a call if you'd rather talk through your project directly.
               </p>
               <table cellpadding="0" cellspacing="0" style="margin:0 auto 32px;">
@@ -148,12 +148,12 @@ export async function POST(req: Request) {
 
           <!-- Footer -->
           <tr>
-            <td bgcolor="#111111" style="background-color:#111111;padding:24px 40px;border-top:1px solid #2a2a2a;">
+            <td bgcolor="#ffffff" style="background-color:#ffffff;padding:24px 40px;border-top:1px solid #e5e7eb;">
               <p style="margin:0;font-size:14px;color:#6b7280;">Colby Nelsen — Founder &amp; Developer</p>
               <p style="margin:4px 0 0;font-size:14px;color:#6b7280;">
-                <a href="mailto:colby@rootlabs.io" style="color:#60a5fa;text-decoration:none;">colby@rootlabs.io</a>
+                <a href="mailto:colby@rootlabs.io" style="color:#2563eb;text-decoration:none;">colby@rootlabs.io</a>
                 &nbsp;·&nbsp;
-                <a href="https://rootlabs.io" style="color:#60a5fa;text-decoration:none;">rootlabs.io</a>
+                <a href="https://rootlabs.io" style="color:#2563eb;text-decoration:none;">rootlabs.io</a>
               </p>
             </td>
           </tr>
