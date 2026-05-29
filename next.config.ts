@@ -24,7 +24,12 @@ const nextConfig: NextConfig = {
           },
           {
             key: "Strict-Transport-Security",
-            value: "max-age=31536000",
+            value: "max-age=31536000; includeSubDomains",
+          },
+          {
+            key: "Content-Security-Policy",
+            value:
+              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://va.vercel-scripts.com https://cdn.vercel-insights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://vitals.vercel-insights.com; frame-src https://calendly.com;",
           },
         ],
       },

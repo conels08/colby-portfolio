@@ -105,6 +105,29 @@ export async function POST(req: Request) {
     const resendKey = process.env.RESEND_API_KEY;
     const notifyTo = process.env.NEWSLETTER_NOTIFY_TO;
 
+    if (resendKey) {
+      const welcomeResend = new Resend(resendKey);
+      const { error: welcomeError } = await welcomeResend.emails.send({
+        from: "Colby Nelsen | Root Labs <colby@rootlabs.io>",
+        to: [email],
+        subject: "Welcome — you're on the list",
+        text: `Hey,
+
+Thanks for subscribing — you're on the list.
+
+You'll hear from me occasionally with project updates, useful tools, and early access to things I'm building.
+
+No spam. Ever.
+
+— Colby
+Root Labs | rootlabs.io`,
+      });
+
+      if (welcomeError) {
+        console.error("Newsletter welcome email send failed:", welcomeError);
+      }
+    }
+
     if (!resendKey || !notifyTo) {
       console.error(
         "Newsletter notification skipped: missing RESEND_API_KEY or NEWSLETTER_NOTIFY_TO."

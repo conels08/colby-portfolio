@@ -61,6 +61,7 @@ const personStructuredData = {
   sameAs: [
     "https://github.com/conels08",
     "https://www.linkedin.com/in/colbynelsen",
+    "https://rootlabs.io",
   ],
 };
 
@@ -69,6 +70,26 @@ const websiteStructuredData = {
   "@type": "WebSite",
   url: "https://colbynelsen.com",
   name: "Colby Nelsen Portfolio",
+};
+
+const professionalServiceStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: "Root Labs",
+  url: "https://colbynelsen.com",
+  description:
+    "AI-powered web apps and automations for small businesses. Built with Next.js, TypeScript, and Tailwind.",
+  founder: {
+    "@type": "Person",
+    name: "Colby Nelsen",
+  },
+  areaServed: {
+    "@type": "State",
+    name: "Oregon",
+  },
+  serviceType: ["Web Development", "AI Automation", "Web Design"],
+  email: "colby@rootlabs.io",
+  sameAs: ["https://rootlabs.io"],
 };
 
 export default function RootLayout({
@@ -86,6 +107,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceStructuredData) }}
         />
       </head>
       <body>
