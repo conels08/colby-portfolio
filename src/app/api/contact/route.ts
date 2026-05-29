@@ -83,7 +83,7 @@ export async function POST(req: Request) {
       .join("\n");
 
     const { error } = await resend.emails.send({
-      from: "Colby Nelsen | Root Labs <onboarding@resend.dev>",
+      from: "Colby Nelsen | Root Labs <colby@rootlabs.io>",
       to: [toEmail],
       replyTo: email,
       subject,
@@ -115,7 +115,7 @@ export async function POST(req: Request) {
 
     // Best-effort — don't fail the request if this errors
     await resend.emails.send({
-      from: "Colby Nelsen | Root Labs <onboarding@resend.dev>",
+      from: "Colby Nelsen | Root Labs <colby@rootlabs.io>",
       to: [email],
       subject: "Got your message — I'll be in touch soon",
       text: autoReplyText,

@@ -113,7 +113,7 @@ export async function POST(req: Request) {
       const resend = new Resend(resendKey);
       const timestamp = new Date().toISOString();
       const { error: sendError } = await resend.emails.send({
-        from: "Colby Portfolio <onboarding@resend.dev>",
+        from: "Colby Nelsen | Root Labs <colby@rootlabs.io>",
         to: [notifyTo],
         subject: "New Newsletter Subscriber",
         html: `
