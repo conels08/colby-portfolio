@@ -89,6 +89,16 @@ const professionalServiceStructuredData = {
   },
   serviceType: ["Web Development", "AI Automation", "Web Design"],
   email: "colby@rootlabs.io",
+  telephone: "+15039845813",
+  priceRange: "$$",
+  image: "https://colbynelsen.com/rootlabs-logo-primary.png",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Newberg",
+    addressRegion: "OR",
+    postalCode: "97132",
+    addressCountry: "US",
+  },
   sameAs: ["https://rootlabs.io"],
 };
 
