@@ -109,7 +109,17 @@ export async function POST(req: Request) {
     // Auto-reply confirmation to the person who submitted
     const autoReplyHtml = `<!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <style>
+    :root { color-scheme: light; }
+    .header-bg { background-color: #000000 !important; }
+    [data-ogsc] .header-bg { background-color: #000000 !important; }
+  </style>
+</head>
 <body style="margin:0;padding:0;background-color:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 16px;">
     <tr>
@@ -118,7 +128,7 @@ export async function POST(req: Request) {
 
           <!-- Header -->
           <tr>
-            <td bgcolor="#000000" style="background-color:#000000 !important;padding:32px 40px;text-align:center;">
+            <td class="header-bg" bgcolor="#000000" style="background-color:#000000 !important;padding:32px 40px;text-align:center;">
               <img src="https://colbynelsen.com/rootlabs-logo-transparent.png" alt="Root Labs" width="160" style="display:block;margin:0 auto;" />
             </td>
           </tr>
