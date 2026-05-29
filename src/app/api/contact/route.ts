@@ -76,8 +76,81 @@ export async function POST(req: Request) {
     const resend = new Resend(resendKey);
 
     const subject = `New inquiry from ${name} — Root Labs`;
-    const text = [
-      `Name: ${name}`,
+    const timestamp = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles", dateStyle: "medium", timeStyle: "short" });
+
+    const notificationHtml = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:32px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+          <tr>
+            <td style="padding:0;line-height:0;font-size:0;">
+              <img src="https://colbynelsen.com/email-header.png" alt="Root Labs" width="560" style="display:block;width:100%;max-width:560px;" />
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#ffffff" style="background-color:#ffffff;padding:32px 40px;">
+              <p style="margin:0 0 24px;font-size:18px;font-weight:600;color:#111827;">New Inquiry</p>
+
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;">
+                    <span style="font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;">From</span><br/>
+                    <span style="font-size:15px;color:#111827;">${escapeHtml(name)}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;">
+                    <span style="font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;">Email</span><br/>
+                    <a href="mailto:${escapeHtml(email)}" style="font-size:15px;color:#2563eb;text-decoration:none;">${escapeHtml(email)}</a>
+                  </td>
+                </tr>
+                ${company ? `<tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;">
+                    <span style="font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;">Company</span><br/>
+                    <span style="font-size:15px;color:#111827;">${escapeHtml(company)}</span>
+                  </td>
+                </tr>` : ""}
+                ${website ? `<tr>
+                  <td style="padding:10px 0;border-bottom:1px solid #f3f4f6;">
+                    <span style="font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;">Website</span><br/>
+                    <a href="${escapeHtml(website)}" style="font-size:15px;color:#2563eb;text-decoration:none;">${escapeHtml(website)}</a>
+                  </td>
+                </tr>` : ""}
+                <tr>
+                  <td style="padding:10px 0;">
+                    <span style="font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:0.05em;">Message</span><br/>
+                    <p style="margin:8px 0 0;font-size:15px;color:#374151;line-height:1.6;background-color:#f9fafb;border-left:3px solid #2563eb;padding:12px 16px;border-radius:0 6px 6px 0;">${escapeHtml(message).replaceAll("\n", "<br/>")}</p>
+                  </td>
+                </tr>
+              </table>
+
+              <table cellpadding="0" cellspacing="0" style="margin:28px auto 0;">
+                <tr>
+                  <td bgcolor="#2563eb" style="background-color:#2563eb;border-radius:8px;">
+                    <a href="mailto:${escapeHtml(email)}" style="display:inline-block;padding:12px 24px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;">Reply to ${escapeHtml(name)}</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td bgcolor="#ffffff" style="background-color:#ffffff;padding:16px 40px 24px;border-top:1px solid #e5e7eb;">
+              <p style="margin:0;font-size:12px;color:#9ca3af;">Received ${timestamp} PT · colbynelsen.com</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+
+    const notificationText = [
+      `From: ${name}`,
       `Email: ${email}`,
       company ? `Company: ${company}` : null,
       website ? `Website: ${website}` : null,
@@ -85,17 +158,16 @@ export async function POST(req: Request) {
       "Message:",
       message,
       "",
-      `Timestamp: ${new Date().toISOString()}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
+      `Received: ${timestamp} PT`,
+    ].filter(Boolean).join("\n");
 
     const { error } = await resend.emails.send({
       from: "Colby Nelsen | Root Labs <colby@rootlabs.io>",
       to: [toEmail],
       replyTo: email,
       subject,
-      text,
+      html: notificationHtml,
+      text: notificationText,
     });
 
     if (error) {
