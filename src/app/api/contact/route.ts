@@ -112,40 +112,33 @@ export async function POST(req: Request) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light">
-  <meta name="supported-color-schemes" content="light">
-  <style>
-    :root { color-scheme: light; }
-    .header-bg { background-color: #000000 !important; }
-    [data-ogsc] .header-bg { background-color: #000000 !important; }
-  </style>
 </head>
-<body style="margin:0;padding:0;background-color:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f4f5;padding:40px 16px;">
+<body style="margin:0;padding:0;background-color:#111111;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" bgcolor="#111111" style="background-color:#111111;padding:40px 16px;">
     <tr>
       <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background-color:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;border-radius:12px;overflow:hidden;">
 
           <!-- Header -->
           <tr>
-            <td class="header-bg" bgcolor="#000000" style="background-color:#000000 !important;padding:32px 40px;text-align:center;">
+            <td bgcolor="#000000" style="background-color:#000000;padding:32px 40px;text-align:center;">
               <img src="https://colbynelsen.com/rootlabs-logo-transparent.png" alt="Root Labs" width="160" style="display:block;margin:0 auto;" />
             </td>
           </tr>
 
           <!-- Body -->
           <tr>
-            <td style="padding:40px 40px 32px;">
-              <p style="margin:0 0 16px;font-size:16px;color:#111827;">Hi ${escapeHtml(name)},</p>
-              <p style="margin:0 0 16px;font-size:16px;color:#374151;line-height:1.6;">
+            <td bgcolor="#1a1a1a" style="background-color:#1a1a1a;padding:40px 40px 32px;">
+              <p style="margin:0 0 16px;font-size:16px;color:#f9fafb;">Hi ${escapeHtml(name)},</p>
+              <p style="margin:0 0 16px;font-size:16px;color:#d1d5db;line-height:1.6;">
                 Your message came through — thanks for reaching out. I'll get back to you within 24 hours.
               </p>
-              <p style="margin:0 0 32px;font-size:16px;color:#374151;line-height:1.6;">
+              <p style="margin:0 0 32px;font-size:16px;color:#d1d5db;line-height:1.6;">
                 In the meantime, feel free to book a call if you'd rather talk through your project directly.
               </p>
               <table cellpadding="0" cellspacing="0" style="margin:0 auto 32px;">
                 <tr>
-                  <td style="background-color:#2563eb;border-radius:8px;">
+                  <td bgcolor="#2563eb" style="background-color:#2563eb;border-radius:8px;">
                     <a href="https://calendly.com/colbynelsen/phone-meeting" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;">Book a Free Call</a>
                   </td>
                 </tr>
@@ -155,12 +148,12 @@ export async function POST(req: Request) {
 
           <!-- Footer -->
           <tr>
-            <td style="padding:24px 40px;border-top:1px solid #e5e7eb;">
+            <td bgcolor="#111111" style="background-color:#111111;padding:24px 40px;border-top:1px solid #2a2a2a;">
               <p style="margin:0;font-size:14px;color:#6b7280;">Colby Nelsen — Founder &amp; Developer</p>
               <p style="margin:4px 0 0;font-size:14px;color:#6b7280;">
-                <a href="mailto:colby@rootlabs.io" style="color:#2563eb;text-decoration:none;">colby@rootlabs.io</a>
+                <a href="mailto:colby@rootlabs.io" style="color:#60a5fa;text-decoration:none;">colby@rootlabs.io</a>
                 &nbsp;·&nbsp;
-                <a href="https://rootlabs.io" style="color:#2563eb;text-decoration:none;">rootlabs.io</a>
+                <a href="https://rootlabs.io" style="color:#60a5fa;text-decoration:none;">rootlabs.io</a>
               </p>
             </td>
           </tr>
