@@ -118,7 +118,7 @@ export async function POST(req: Request) {
 
           <!-- Header -->
           <tr>
-            <td style="background-color:#000000 !important;padding:32px 40px;text-align:center;mso-padding-alt:32px 40px;">
+            <td bgcolor="#000000" style="background-color:#000000 !important;padding:32px 40px;text-align:center;">
               <img src="https://colbynelsen.com/rootlabs-logo-transparent.png" alt="Root Labs" width="160" style="display:block;margin:0 auto;" />
             </td>
           </tr>
